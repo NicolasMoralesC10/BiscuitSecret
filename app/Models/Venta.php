@@ -10,9 +10,10 @@ class Venta extends Model
     use HasFactory;
 
     protected $fillable = [
-        'fecha',
         'total',
         'metodo_pago',
-        'estado',
+        'estado',/* 
+        'created_at',
+        'updated_at' */
     ];
 }
