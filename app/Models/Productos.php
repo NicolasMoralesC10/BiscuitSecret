@@ -12,9 +12,11 @@ class Productos extends Model
     protected $perPage = 20;
     protected $fillable = [
         'descripcion',
+        'nombre',
         'precio',
         'cantidad',
         'imagen',
         'estado',
+
     ];
 }
