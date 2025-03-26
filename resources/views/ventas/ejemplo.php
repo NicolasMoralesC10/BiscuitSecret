@@ -598,9 +598,9 @@ $mysql->desconectar();
                 e.preventDefault();
 
                 // -----------------------------------
-                // VERIFICAR INPUTS VACIOS
+                //    VERIFICAR INPUTS VACIOS
                 // -----------------------------------
-                var inputMetodos = $("#metodos").val();
+                /* var inputMetodos = $("#metodos").val();
                 if (inputMetodos.trim() === "" || inputMetodos == null) {
                     Swal.fire({
                         icon: 'warning',
@@ -609,7 +609,7 @@ $mysql->desconectar();
                     });
                     return false;
                 }
-                console.log(inputMetodos);
+                console.log(inputMetodos); */
 
 
                 /*          var inputPrecio = $("#precio").val();
@@ -623,7 +623,7 @@ $mysql->desconectar();
                          }
                          console.log(inputPrecio); */
 
-                var inputClien = $("#clien").val();
+                /* var inputClien = $("#clien").val();
                 if (inputClien.trim() === "" || inputClien == null) {
                     Swal.fire({
                         icon: 'warning',
@@ -631,9 +631,9 @@ $mysql->desconectar();
                         text: 'Por favor, ingrese el cliente.',
                     });
                     return false;
-                }
+                } */
 
-                var inputEmpleado = $("#emple").val();
+                /* var inputEmpleado = $("#emple").val();
                 if (inputEmpleado.trim() === "" || inputEmpleado == null) {
                     Swal.fire({
                         icon: 'warning',
@@ -641,7 +641,7 @@ $mysql->desconectar();
                         text: 'Por favor, ingrese el empleado.',
                     });
                     return false;
-                }
+                } */
 
                 var filas = $("#tabla-productos tbody tr").length;
                 if (filas === 0) {

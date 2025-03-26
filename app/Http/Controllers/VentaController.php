@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-/* use App\Models\Producto; */
+use App\Models\Producto;
 use App\Models\Venta;
 
 class VentaController extends Controller
@@ -20,6 +20,7 @@ class VentaController extends Controller
         $productos = Producto::all();
 
         return view('ventas.create', compact('productos'));
+       /*  return view('ventas.create'); */
     }
 
     // Método para guardar un nuevo producto
