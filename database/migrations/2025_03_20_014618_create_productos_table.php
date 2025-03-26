@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('cantidad');
             $table->string('imagen', 200);
             $table->integer('estado');
+            $table->timestamps();
         });
     }
 

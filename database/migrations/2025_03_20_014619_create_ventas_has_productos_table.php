@@ -25,7 +25,7 @@ return new class extends Migration
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
             $table->foreign('productos_id_producto')
-                ->references('id_producto')->on('productos')
+                ->references('id')->on('productos')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
         });

@@ -53,6 +53,29 @@ class ProductoController extends Controller
         return view('productos.edit', compact('producto'));
     }
 
+    public function update(Request $request, Productos $producto)
+    {
+        $data = $request->validate([
+            'nombre' => 'required',
+            'precio' => 'required',
+            'cantidad' => 'required',
+            'descripcion' => 'required',
+            'estado' => 'required',
+            'imagen' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048'
+        ]);
+
+
+        if ($request->hasFile('imagen')) {
+            $path = $request->file('imagen')->store('images', 'public');
+            $data['imagen'] = $path;
+        } else {
+            unset($data['imagen']);
+        }
+
+        $producto->update($data);
+        return redirect()->route('productos.index');
+    }
+
     public function destroy(Productos $producto)
     {
         $producto->delete();

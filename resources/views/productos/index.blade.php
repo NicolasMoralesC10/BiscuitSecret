@@ -11,7 +11,7 @@
                         <div>
                             <h5 class="mb-0">Productos</h5>
                         </div>
-                        <a href="{{ route('productos.create') }}" class="btn bg-gradient-primary btn-sm mb-0" type="button">+&nbsp; New User</a>
+                        <a href="{{ route('productos.create') }}" class="btn bg-gradient-primary btn-sm mb-0" type="button">+&nbsp; Nuevo Producto</a>
                     </div>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -19,9 +19,6 @@
                         <table class="table align-items-center mb-0">
                             <thead class="text-center">
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        ID
-                                    </th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Nombre
                                     </th>
@@ -48,9 +45,6 @@
                             <tbody class="text-center">
                                 @foreach ($productos as $producto)
                                 <tr>
-                                    <td class="ps-4">
-                                        <p class="text-xs font-weight-bold mb-0">{{ $producto->id }}</p>
-                                    </td>
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $producto->nombre }}</p>
                                     </td>
@@ -72,7 +66,7 @@
                                     <td class="text-center">
                                         <span class="badge badge-sm bg-gradient-primary">Activo</span>
                                     </td>
-                                    @else
+                                    @elseif($producto->estado == 2)
                                     <td class="text-center">
                                         <span class="badge badge-sm bg-gradient-secondary">Offline</span>
                                     </td>
