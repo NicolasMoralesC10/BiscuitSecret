@@ -124,27 +124,110 @@
                     @endif
 
                     <div class="row">
-
-                                    <div class="form-group">
-                                        <label for="product">Buscar Producto</label>
-                                        <input type="text" class="form-control" id="product" placeholder="Ingrese el nombre del producto">
-                                    </div>
-                                    
-                                    <table class="table table-bordered" id="tabla-productos" hidden="true">
-                                        <thead>
-                                            <tr>
-                                                <th>Producto</th>
-                                                <th>Cantidad</th>
-                                                <th>Precio</th>
-                                                <th>Eliminar</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- Aquí se agregan dinámicamente las filas -->
-                                        </tbody>
-                                    </table>
-
+                        <div class="form-group">
+                            <label for="product">Buscar Producto</label>
+                            <input type="text" class="form-control" id="product" placeholder="Ingrese el nombre del producto">
+                        </div>
                     </div>
+
+
+						  						<!-- <div class="card-body px-0 pt-0 pb-2">
+                                        <div class="table-responsive p-0">
+                                    
+                                            <table class="table bordered align-items-center mb-3">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Producto</th>
+                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cantidad</th>
+                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Precio</th>
+                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Eliminar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    Aquí se agregan dinámicamente las filas
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div> -->
+
+
+
+
+                    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4 shadow-lg">
+            <!-- <div class="card-header">
+              <h6>Productos</h6>
+            </div> -->
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0" id="tabla-productos">
+                  <thead>
+                    <tr>
+                      	<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Producto</th>
+                      	<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Cantidad</th>
+                      	<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Precio</th>
+                      	<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ELiminar</th>
+                     	<!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Producto</th>
+                     	<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cantidad</th>
+                     	<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Precio</th>
+                     	<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Eliminar</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">John Michael</h6>
+                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="text-xs font-weight-bold mb-0">Manager</p>
+                        <p class="text-xs text-secondary mb-0">Organization</p>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="badge badge-sm bg-gradient-success">Online</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user2">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
+                            <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="text-xs font-weight-bold mb-0">Programator</p>
+                        <p class="text-xs text-secondary mb-0">Developer</p>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
                     <div class="row">
                         <div class="col-md-4">
@@ -173,7 +256,6 @@
                         <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Guardar' }}</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -182,7 +264,9 @@
 <!-- --------------------------------------------------------------------------------------------->
 
     <!-- jQuery y jQuery UI-->
-     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+     <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script> -->
+     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -280,13 +364,44 @@
                         title: '¡Producto ya agregado!',
                         text: 'El producto ya está en la tabla de productos seleccionados.',
                     });
-                } else {
-                  var nuevaFila = `<tr>
-                                        <td><input type="hidden" name="producto_id[]" value="` + id + `">` + nombre + `</td>
-                                        <td><input type="number" name="cantidad[]" id="cantidad" class="form-control" placeholder="Cantidad" required></td>
-                                        <td><input type="number" name="precio[]" id="precioInput" class="form-control" placeholder="` + precio + `" required></td>
-                                        <td style="text-align: center;"><button type="button"class="btn btn-danger btn-sm eliminar-fila"><i class="fas fa-trash"></i></button></td>
-                                    </tr>`;  
+                } else { 
+                  let nuevaFila = `<tr>
+                                 		<td>
+														<div class="d-flex px-2 py-1">
+                          							<div>
+                          							  <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user2">
+                          							</div>
+                                          	<div class="d-flex flex-column justify-content-center"> 
+                                         			<input type="hidden" name="producto_id[]" value="` + id + `"> 
+                                          	   <h6 class="mb-0 text-sm">` + nombre + `</h6>
+															</div>
+                                          </div>
+                                       </td>
+													
+                                 		<td>
+														<div class="">
+                                          	<div class=""> 
+																<input type="number" name="cantidad[]" id="cantidad" class="form-control" placeholder="Cantidad" required>
+															</div>
+                                          </div>
+                                       </td>
+
+                                 		<td>
+														<div class="">
+                                          	<div class=""> 
+																<input type="number" name="precio[]" id="precioInput" class="form-control" placeholder="` + precio + `" required>
+															</div>
+                                          </div>
+                                       </td>
+
+                                       <td style="text-align: center;">
+														<div class="pt-2">
+															<button type="button"class="btn btn-danger btn-sm eliminar-fila">
+																<i class="fas fa-trash"></i>
+															</button>
+                                          </div>
+													</td>
+                                   </tr>`;  
                                 console.log(nuevaFila);
                                 console.log($("#tabla-productos tbody"));
                   $("#tabla-productos tbody").append(nuevaFila);
