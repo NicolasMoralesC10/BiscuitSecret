@@ -396,13 +396,13 @@ $mysql->desconectar();
                     },
                 <?php } ?>
             ]; */
-            
+
             // Se convierte la variable de PHP $productos a un formato JSON que es manejable en JavaScript
-            var availableProducts = @json($productos->map(function($producto) {
+            var availableProducts = @json($productos - > map(function($producto) {
                 return [
-                    'label' => $producto->nombre,
-                    'value' => $producto->id,
-                    'precio' => $producto->precio,
+                    'label' => $producto - > nombre,
+                    'value' => $producto - > id,
+                    'precio' => $producto - > precio,
                 ];
             }));
 
@@ -494,7 +494,7 @@ $mysql->desconectar();
                     $("#tabla-productos tbody").append(nuevaFila);
                 }
             }
-            
+
             // -----------------------------------
             //    VALIDAR PRECIO
             // -----------------------------------

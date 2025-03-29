@@ -16,31 +16,35 @@ class VentaController extends Controller
         return view('ventas.index', compact('ventas'));
     }
 
-    public function create() {
+    public function create()
+    {
         $productos = Producto::all();
 
         return view('ventas.create', compact('productos'));
-       /*  return view('ventas.create'); */
+        /*  return view('ventas.create'); */
     }
 
     // Método para guardar un nuevo producto
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         return "Guardando un nuevo producto";
     }
-    
+
     // Método para editar un producto
-    public function edit($id) {
+    public function edit($id)
+    {
         return "Formulario para editar el producto con ID: " . $id;
     }
 
     // Método para actualizar un producto
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         return "Actualizando producto con ID: " . $id;
     }
 
     // Método para eliminar un producto
-    public function destroy($id) {
+    public function destroy($id)
+    {
         return "Eliminando producto con ID: " . $id;
     }
-
 }
