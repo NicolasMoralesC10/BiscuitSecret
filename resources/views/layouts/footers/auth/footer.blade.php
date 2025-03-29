@@ -6,12 +6,11 @@
                 title: '¿Estás seguro?',
                 text: "¡Este producto será eliminado permanentemente!",
                 icon: 'warning',
-                confirmButtonColor: "#6e7881",
-                cancelButtonColor: "#7066e0",
                 showCancelButton: true,
+                confirmButtonColor: "#7066e0",
+                cancelButtonColor: "#6e7881",
                 cancelButtonText: 'Cancelar',
                 confirmButtonText: 'Sí, eliminar',
-                reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('delete-form-' + id).submit();

@@ -39,13 +39,11 @@
   <!-- Nucleo Icons -->
   <link href="{{ asset( '../assets/css/nucleo-icons.css') }}" rel="stylesheet" />
   <link href="{{ asset( '../assets/css/nucleo-svg.css')}}" rel="stylesheet" />
-
   <!-- Font Awesome Icons -->
   <link href=" {{asset( '../assets/css/all.min.css')}}" rel="stylesheet" />
   <link href=" {{ asset( '../assets/css/nucleo-svg.css')}}" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset('../assets/css/soft-ui-dashboard.css?v=1.0.3') }}" rel="stylesheet" />
-</head>
 
 <body class="g-sidenav-show  bg-gray-100 {{ (\Request::is('rtl') ? 'rtl' : (Request::is('virtual-reality') ? 'virtual-reality' : '')) }} ">
   @auth

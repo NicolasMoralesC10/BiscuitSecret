@@ -88,11 +88,13 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="pagination-container">
+                            {{ $productos->links('pagination::bootstrap-4') }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-@endsection
+    @endsection

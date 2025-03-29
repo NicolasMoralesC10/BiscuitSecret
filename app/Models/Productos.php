@@ -9,7 +9,7 @@ class Productos extends Model
 {
     use HasFactory;
 
-    protected $perPage = 20;
+   
     protected $fillable = [
         'descripcion',
         'nombre',
