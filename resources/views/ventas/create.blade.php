@@ -123,12 +123,14 @@
                     </div>
                     @endif
 
-                    <div class="row">
-                        <div class="form-group">
-                            <label for="product">Buscar Producto</label>
-                            <input type="text" class="form-control" id="product" placeholder="Ingrese el nombre del producto">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="product">Buscar Producto</label>
+                                <input type="text" class="form-control" id="product" placeholder="Ingrese el nombre del producto">
+                            </div>
                         </div>
-                    </div>
+                    <!-- </div> -->
 
 
                     <!-- <div class="card-body px-0 pt-0 pb-2">
@@ -153,13 +155,13 @@
 
 
 
-                    <div class="container-fluid">
+                    <!-- <div class="container-fluid"> -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="card mb-4 shadow-lg">
                                     <!-- <div class="card-header">
-              <h6>Productos</h6>
-            </div> -->
+                                          <h6>Productos</h6>
+                                        </div> -->
                                     <div class="card-body px-0 pt-0 pb-2">
                                         <div class="table-responsive p-0">
                                             <table class="table align-items-center mb-0" id="tabla-productos">
@@ -170,33 +172,13 @@
                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Precio</th>
                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ELiminar</th>
                                                         <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Producto</th>
-                     	<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cantidad</th>
-                     	<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Precio</th>
-                     	<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Eliminar</th> -->
+                     	                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cantidad</th>
+                     	                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Precio</th>
+                     	                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Eliminar</th> -->
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="d-flex px-2 py-1">
-                                                                <div class="d-flex flex-column justify-content-center">
-                                                                    <h6 class="mb-0 text-sm">John Michael</h6>
-                                                                    <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                            <p class="text-xs text-secondary mb-0">Organization</p>
-                                                        </td>
-                                                        <td class="align-middle text-center text-sm">
-                                                            <span class="badge badge-sm bg-gradient-success">Online</span>
-                                                        </td>
-                                                        <td class="align-middle text-center">
-                                                            <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
+                                                    <!-- <tr>
                                                         <td>
                                                             <div class="d-flex px-2 py-1">
                                                                 <div>
@@ -213,12 +195,12 @@
                                                             <p class="text-xs text-secondary mb-0">Developer</p>
                                                         </td>
                                                         <td class="align-middle text-center text-sm">
-                                                            <span class="badge badge-sm bg-gradient-secondary">Offline</span>
+                                                            <span class="badge badge-sm bg-gradient-success">Online</span>
                                                         </td>
                                                         <td class="align-middle text-center">
                                                             <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
                                                         </td>
-                                                    </tr>
+                                                    </tr> -->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -226,10 +208,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <!-- </div> -->
 
 
-                    <div class="row">
+                    <!-- <div class="container-fluid"> -->
+                        <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="total-pagar">Total a Pagar</label>
@@ -250,10 +233,11 @@
                                 <input type="text" class="form-control" id="cambio" placeholder="Dinero a devolver" readonly>
                             </div>
                         </div>
-                    </div>
+                        </div>
 
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Guardar' }}</button>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Guardar' }}</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -277,12 +261,12 @@
         // -----------------------------------
 
         // Se convierte la variable de PHP $productos a un formato JSON que es manejable en JavaScript
-        var availableProducts = @json($productos - > map(function($producto) {
+        var availableProducts = @json($productos -> map(function($producto) {
             return [
-                'value' => $producto - > id_producto,
-                'label' => $producto - > nombre,
-                'precio' => $producto - > precio
-            ];
+                'value' => $producto -> id_producto,
+                'label' => $producto -> nombre,
+                'precio' => $producto -> precio
+            ];    
         }));
         console.log(availableProducts);
 
@@ -307,9 +291,9 @@
             actualizarTotales();
         });
 
-        // -----------------------------------
+        // --------------------------------------
         //    LLAMADO CALCULAR VALOR A DEVOLVER
-        // -----------------------------------
+        // --------------------------------------
 
         $('#dinero-recibido').on('input', function() {
             actualizarCambio();
@@ -364,42 +348,42 @@
                 });
             } else {
                 let nuevaFila = `<tr>
-                                 		<td>
-														<div class="d-flex px-2 py-1">
-                          							<div>
-                          							  <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user2">
-                          							</div>
-                                          	<div class="d-flex flex-column justify-content-center"> 
-                                         			<input type="hidden" name="producto_id[]" value="` + id + `"> 
-                                          	   <h6 class="mb-0 text-sm">` + nombre + `</h6>
-															</div>
-                                          </div>
-                                       </td>
+                                 	<td>
+													<div class="d-flex px-2 py-1">
+                          						<div>
+                          						  <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user2">
+                          						</div>
+                                       	<div class="d-flex flex-column justify-content-center"> 
+                                      			<input type="hidden" name="producto_id[]" value="` + id + `"> 
+                                       	   <h6 class="mb-0 text-sm">` + nombre + `</h6>
+														</div>
+                                       </div>
+                                    </td>
 													
-                                 		<td>
-														<div class="">
-                                          	<div class=""> 
-																<input type="number" name="cantidad[]" id="cantidad" class="form-control" placeholder="Cantidad" required>
-															</div>
-                                          </div>
-                                       </td>
+                                 	<td>
+													<div class="">
+                                       	<div class=""> 
+															<input type="number" min="1" name="cantidad[]" id="cantidad" class="form-control" placeholder="Cantidad" required>
+														</div>
+                                       </div>
+                                    </td>
 
-                                 		<td>
-														<div class="">
-                                          	<div class=""> 
-																<input type="number" name="precio[]" id="precioInput" class="form-control" placeholder="` + precio + `" required>
-															</div>
-                                          </div>
-                                       </td>
+                                 	<td>
+													<div class="">
+                                       	<div class=""> 
+															<input type="number" name="precio[]" id="precioInput" class="form-control" placeholder="` + precio + `" required>
+														</div>
+                                       </div>
+                                    </td>
 
-                                       <td style="text-align: center;">
-														<div class="pt-2">
-															<button type="button"class="btn btn-danger btn-sm eliminar-fila">
-																<i class="fas fa-trash"></i>
-															</button>
-                                          </div>
-													</td>
-                                   </tr>`;
+                                    <td style="text-align: center;">
+													<div class="pt-3">
+														<button type="button"class="btn btn-danger btn-sm eliminar-fila">
+															<i class="fas fa-trash"></i>
+														</button>
+                                       </div>
+												</td>
+                                 </tr>`;
                 console.log(nuevaFila);
                 console.log($("#tabla-productos tbody"));
                 $("#tabla-productos tbody").append(nuevaFila);
@@ -433,7 +417,7 @@
         //    VALIDAR CANTIDAD (STOCK)
         // -----------------------------------
 
-        $(document).on('blur', 'input[name="cantidad[]"]', function() {
+        $(document).on('input', 'input[name="cantidad[]"]', function() {
             var id_pro = $(this).closest('tr').find("input[name='producto_id[]']").val();
             validarCantidad(this, id_pro);
         });
@@ -449,14 +433,15 @@
                 });
                 $(campo).val('');
                 return;
-            }
+            } 
 
             $.ajax({
-                url: '../public/indexRegistroVentas.php',
+                url: '{{ url("/obtener-stock") }}',
                 type: 'POST',
                 data: {
                     action: 'obtener_stock',
-                    id_pro: id_pro
+                    id_pro: id_pro,
+						  _token: '{{ csrf_token() }}',  // Incluir el token CSRF para protección
                 },
                 dataType: 'json',
                 success: function(data) {
@@ -467,12 +452,12 @@
                             text: data.error,
                         });
                     } else {
-                        var stock = parseInt(data.inv_CantProd, 10);
+                        var stock = parseInt(data.stock, 10);
                         cantidad = parseInt(cantidad, 10);
                         if (cantidad > stock) {
                             Swal.fire({
                                 icon: 'warning',
-                                title: 'La cantidad excede el stock!',
+                                title: '¡Stock insuficiente!',
                                 text: 'La cantidad ingresada supera el stock disponible: ' + stock,
                             });
                             $(campo).val('');
@@ -512,47 +497,47 @@
             //    VERIFICAR INPUTS VACIOS
             // -----------------------------------
             /* var inputMetodos = $("#metodos").val();
-            if (inputMetodos.trim() === "" || inputMetodos == null) {
+            		if (inputMetodos.trim() === "" || inputMetodos == null) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Metodo de pago no asignado!',
                     text: 'Por favor, ingrese el metodo de pago.',
                 });
                 return false;
-            }
-            console.log(inputMetodos); */
+            		}
+            	console.log(inputMetodos); */
 
 
-            /*          var inputPrecio = $("#precio").val();
-                     if (inputPrecio.trim() === "" || inputPrecio == null) {
+            /* var inputPrecio = $("#precio").val();
+            		if (inputPrecio.trim() === "" || inputPrecio == null) {
                          Swal.fire({
                              icon: 'warning',
                              title: 'Pago no asignada!',
                              text: 'Por favor, ingrese el pago.',
                          });
                          return false;
-                     }
-                     console.log(inputPrecio); */
+            		}
+            	console.log(inputPrecio); */
 
             /* var inputClien = $("#clien").val();
-            if (inputClien.trim() === "" || inputClien == null) {
+            		if (inputClien.trim() === "" || inputClien == null) {
                 Swal.fire({
                     icon: 'warning',
                     title: '¡Cliente no asignado!',
                     text: 'Por favor, ingrese el cliente.',
                 });
                 return false;
-            } */
+            		} */
 
             /* var inputEmpleado = $("#emple").val();
-            if (inputEmpleado.trim() === "" || inputEmpleado == null) {
+            		if (inputEmpleado.trim() === "" || inputEmpleado == null) {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Empleado no asignado!',
                     text: 'Por favor, ingrese el empleado.',
                 });
                 return false;
-            } */
+            		} */
 
             var filas = $("#tabla-productos tbody tr").length;
             if (filas === 0) {

@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('ventas', VentaController::class);
+Route::post('/obtener-stock', [VentaController::class, 'obtenerStock']);
+
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -72,8 +74,6 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('dashboard');
 	})->name('sign-up');
 });
-
-
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', [RegisterController::class, 'create']);

@@ -15,6 +15,24 @@ class VentaController extends Controller
 
         return view('ventas.index', compact('ventas'));
     }
+    
+    public function obtenerStock(Request $request)
+    {
+        $id_pro = $request->input('id_pro');
+        
+        // Buscar producto por ID
+        $producto = Producto::find($id_pro);
+        
+        if (!$producto) {
+            return response()->json([
+                'error' => 'Producto no encontrado.',
+            ]);
+        }
+
+        return response()->json([
+            'stock' => $producto->cantidad,
+        ]);
+    }
 
     public function create()
     {
