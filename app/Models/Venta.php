@@ -16,4 +16,10 @@ class Venta extends Model
         'created_at',
         'updated_at' */
     ];
+
+    public function productos()
+    {
+        return $this->belongsToMany(Producto::class, 'ventas_has_productos', 'ventas_id_venta', 'productos_id_producto')
+                    ->withPivot('cantidad', 'subtotal','estado');
+    }
 }

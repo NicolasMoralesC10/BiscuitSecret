@@ -29,7 +29,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        ID
+                                        No.
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Producto
@@ -53,8 +53,8 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-										    <td >{{ $venta->producto->nombre_producto }}</td>
-										    <td >{{ $venta->cantidad }}</td>
+										    <td >{{ $prod_ventas->productos_id_producto==$productos->id_producto ? $productos->nombre : 'Nombre'}}</td>
+										    <!-- <td >{{ $venta->cantidad }}</td>
 										    <td >{{ $venta->total }}</td>
 
                                             <td>
@@ -65,7 +65,7 @@
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
                                                 </form>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                     @endforeach
 

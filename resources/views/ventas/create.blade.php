@@ -102,7 +102,7 @@
                 <h6 class="mb-0">{{ __('Nueva Venta') }}</h6>
             </div>
             <div class="card-body pt-4 p-3">
-                <form action="/user-profile" method="POST" role="form text-left">
+                <form action="" method="POST" id="form-venta" role="form text-left">
                     @csrf
                     @if($errors->any())
                     <div class="mt-3  alert alert-primary alert-dismissible fade show" role="alert">
@@ -216,7 +216,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="total-pagar">Total a Pagar</label>
-                                <input type="text" class="form-control" id="total-pagar" placeholder="Total a pagar" readonly>
+                                <input type="text" class="form-control" name="total" id="total-pagar" placeholder="Total a pagar" readonly>
                             </div>
                         </div>
 
@@ -550,24 +550,26 @@
             }
 
             var formData = new FormData();
+            var total = $("#total-pagar").val();
             $("#tabla-productos tbody tr").each(function() {
                 var productoId = $(this).find("input[name='producto_id[]']").val();
                 var cantidad = $(this).find("input[name='cantidad[]']").val();
                 var precio = $(this).find("input[name='precio[]']").val();
-                var metodoPago = $("#metodoPagoId").val();
+                /* var metodoPago = $("#metodoPagoId").val();
                 var cliente = $("#clientes").val();
-                var empleado = $("#empleados").val();
+                var empleado = $("#empleados").val(); */
 
-                formData.append('action', 'agregar');
-                formData.append('metodoPagoId', metodoPago);
-                formData.append('clientes', cliente);
-                formData.append('empleados', empleado);
+                /* formData.append('action', 'agregar'); */
                 formData.append('producto_id[]', productoId);
                 formData.append('cantidad[]', cantidad);
                 formData.append('precio[]', precio);
+                /* formData.append('metodoPagoId', metodoPago);
+                formData.append('clientes', cliente);
+                formData.append('empleados', empleado); */
+                formData.append('total', total);
             });
 
-            $.ajax({
+            /* $.ajax({
                 type: 'POST',
                 url: '../public/indexRegistroVentas.php',
                 data: formData,
@@ -583,6 +585,35 @@
                     }).then(() => {
                         window.location.href = 'indexRegistroVentas.php';
                     });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error en la solicitud AJAX:', error);
+                    console.log(xhr.responseText); // Ver detalles del error del servidor
+                }
+            }); */
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('ventas.store') }}', // Usar route() si tienes una ruta definida
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(respuesta) {
+                    console.log("AJAX exitoso:", respuesta); // Verificar la respuesta
+                    Swal.fire({
+                        text: '¡Venta registrada correctamente!',
+                        icon: 'success',
+                        timer: 2000,
+                        showConfirmButton: false
+                    })/* .then(() => {
+                        window.location.href = '{{ url()->route('ventas.index') }}'; // Redirigir a la misma página
+                    }); */
                 },
                 error: function(xhr, status, error) {
                     console.error('Error en la solicitud AJAX:', error);
