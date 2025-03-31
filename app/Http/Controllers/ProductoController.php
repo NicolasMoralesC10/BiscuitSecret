@@ -10,7 +10,7 @@ class ProductoController extends Controller
     public function index()
     {
 
-        $productos = Productos::paginate(1);
+        $productos = Productos::paginate(6);
         return view('productos.index', compact('productos'));
     }
 
@@ -23,8 +23,8 @@ class ProductoController extends Controller
     {
         $request->validate([
             'nombre' => 'required',
-            'precio' => 'required',
-            'cantidad' => 'required',
+            'precio' => 'required|numeric|min:1',
+            'cantidad' => 'required|numeric|min:1',
             'descripcion' => 'required',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validar imagen
         ]);
@@ -50,7 +50,6 @@ class ProductoController extends Controller
 
     public function edit(Productos $producto)
     {
-
         return view('productos.edit', compact('producto'));
     }
 
@@ -58,8 +57,8 @@ class ProductoController extends Controller
     {
         $data = $request->validate([
             'nombre' => 'required',
-            'precio' => 'required',
-            'cantidad' => 'required',
+            'precio' => 'required|numeric|min:1',
+            'cantidad' => 'required|numeric|min:1',
             'descripcion' => 'required',
             'estado' => 'required',
             'imagen' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048'

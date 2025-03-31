@@ -44,9 +44,9 @@
 
                         <div class="form-group">
                             <label for="user.phone" class="form-control-label">Precio</label>
-                            <div class="@error('user.name')border border-danger rounded-3 @enderror">
-                                <input class="form-control" value="" type="number" placeholder="Precio" name="precio" required>
-                                @error('name')
+                            <div class="@error('precio')border border-danger rounded-3 @enderror">
+                                <input class="form-control" value="" type="number" placeholder="Precio" min="1" name="precio" required>
+                                @error('precio')
                                 <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -57,9 +57,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="user.phone" class="form-control-label">Cantidad</label>
-                            <div class="@error('user.phone')border border-danger rounded-3 @enderror">
-                                <input class="form-control" type="number" placeholder="Cantidad" name="cantidad" value="" required>
-                                @error('phone')
+                            <div class="@error('cantidad')border border-danger rounded-3 @enderror">
+                                <input class="form-control" type="number" min="1" placeholder="Cantidad" name="cantidad" value="" required>
+                                @error('cantidad')
                                 <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -68,9 +68,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="user-email" class="form-control-label">Imagen</label>
-                            <div class="@error('email')border border-danger rounded-3 @enderror">
+                            <div class="@error('image')border border-danger rounded-3 @enderror">
                                 <input class="form-control" value="" type="file" name="imagen" accept="image/*" required>
-                                @error('email')
+                                @error('image')
                                 <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -79,7 +79,7 @@
                 </div>
                 <div class="form-group">
                     <label for="about">Descripcion</label>
-                    <div class="@error('user.about')border border-danger rounded-3 @enderror">
+                    <div class="@error('about')border border-danger rounded-3 @enderror">
                         <textarea class="form-control" id="about" rows="3" placeholder="Descripcion del Producto" name="descripcion" required></textarea>
                     </div>
                 </div>

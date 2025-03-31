@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label for="user-name" class="form-control-label">Nombre</label>
                             <div class="@error('user.name')border border-danger rounded-3 @enderror">
-                                <input class="form-control" value="{{ $producto->nombre }}" type="text" placeholder="Name" name="nombre">
+                                <input class="form-control" value="{{ $producto->nombre }}" type="text" placeholder="Name" name="nombre" required>
                                 @error('name')
                                 <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                 @enderror
@@ -45,9 +45,9 @@
 
                         <div class="form-group">
                             <label for="user.phone" class="form-control-label">Precio</label>
-                            <div class="@error('user.name')border border-danger rounded-3 @enderror">
-                                <input class="form-control" value="{{ $producto->precio }}" type="number" placeholder="Precio" name="precio">
-                                @error('name')
+                            <div class="@error('precio')border border-danger rounded-3 @enderror">
+                                <input class="form-control" value="{{ $producto->precio }}" type="number" min="1" placeholder="Precio" name="precio" required>
+                                @error('precio')
                                 <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -56,9 +56,9 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="user-email" class="form-control-label">Imagen</label>
-                            <div class="@error('email')border border-danger rounded-3 @enderror">
+                            <div class="@error('image')border border-danger rounded-3 @enderror">
                                 <input class="form-control" value="" type="file" accept="image/*" name="imagen">
-                                @error('email')
+                                @error('image')
                                 <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
@@ -69,9 +69,9 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="user.phone" class="form-control-label">Cantidad</label>
-                            <div class="@error('user.phone')border border-danger rounded-3 @enderror">
-                                <input class="form-control" type="number" placeholder="Cantidad" name="cantidad" value="{{ $producto->cantidad }}">
-                                @error('phone')
+                            <div class="@error('cantidad')border border-danger rounded-3 @enderror">
+                                <input class="form-control" type="number" placeholder="Cantidad" name="cantidad" min="1" value="{{ $producto->cantidad }}" required>
+                                @error('cantidad')
                                 <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
