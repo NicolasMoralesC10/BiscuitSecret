@@ -11,11 +11,13 @@ class VentaController extends Controller
 {
     public function index(Request $request)
     {
-        $ventas = Venta::paginate();
-        $prod_ventas = Venta::productos();
-        $productos = Producto::all(['id_producto','nombre']);
+        $ventas = Venta::with('productos')->paginate(10);
 
-        return view('ventas.index', compact('ventas', 'productos', 'prod_ventas'))
+        /* $ventas = Venta::paginate();
+        $prod_ventas = Venta::productos(); 
+        $productos = Producto::all(['id_producto','nombre']); */
+
+        return view('ventas.index', compact('ventas'))
             ->with('i', ($request->input('page', 1) - 1) * $ventas->perPage());
     }
     
@@ -48,33 +50,42 @@ class VentaController extends Controller
     // Método para guardar un nuevo producto
     public function store(Request $request)
     {
-        foreach ($request->producto_id as $index => $id) {
+        try {
+            foreach ($request->producto_id as $index => $id) {
             $producto = Producto::find($id);
             if ($producto['cantidad'] < $request->cantidad[$index]){
                 return Redirect::route('ventas.index')
                 ->with('error', 'La cantidad del producto '. $producto->nombre . ' excede el stock.');
             }
-        }
-        /* $venta = Venta::create($request->only(['total'])); */
-
-        $venta = Venta::create([
-            'total' => $request->total,
-            'estado' => 1, 
-        ]);
-
-        foreach ($request->producto_id as $index => $id) {
-            $producto = Producto::find($id);
-            $subtotal = $producto['precio']*$request->cantidad[$index];
-            $newStock = $producto['cantidad']-$request->cantidad[$index];
-            Producto::where('id_producto', $id)->update(['cantidad'=>$newStock]);
-            $venta->productos()->attach($id, [
-                //Se usa ?? 1 para asignar un valor predeterminado si no se encuentra el índice.
-                'cantidad' => $request->cantidad[$index] ?? 1,
-                'subtotal' => $subtotal,
-                'estado' => 1
+            }
+            /* $venta = Venta::create($request->only(['total'])); */
+        
+            $venta = Venta::create([
+                'total' => $request->total,
+                'estado' => 1, 
             ]);
+        
+            foreach ($request->producto_id as $index => $id) {
+                $producto = Producto::find($id);
+                $subtotal = $producto['precio']*$request->cantidad[$index];
+                $newStock = $producto['cantidad']-$request->cantidad[$index];
+                Producto::where('id_producto', $id)->update(['cantidad'=>$newStock]);
+                $venta->productos()->attach($id, [
+                    //Se usa ?? 1 para asignar un valor predeterminado si no se encuentra el índice.
+                    'cantidad' => $request->cantidad[$index] ?? 1,
+                    'subtotal' => $subtotal,
+                    'estado' => 1
+                ]);
+            }
+            
+            return response()->json(['success' => true, 'message' => '¡Venta registrada correctamente!']);
         }
-        return redirect()->route('ventas.index');
+        catch (\Exception $e) {
+            // Si ocurre algún error, maneja la excepción y devuelve un error
+            return response()->json(['success' => false, 'message' => 'Error al registrar la venta.'], 500);
+        }
+        
+        /* return redirect()->route('ventas.index'); */
         /* return "Guardando un nuevo producto"; */
     }
 

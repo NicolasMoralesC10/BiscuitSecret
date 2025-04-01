@@ -611,9 +611,9 @@
                         icon: 'success',
                         timer: 2000,
                         showConfirmButton: false
-                    })/* .then(() => {
-                        window.location.href = '{{ url()->route('ventas.index') }}'; // Redirigir a la misma página
-                    }); */
+                    }).then(() => {
+                        window.location.href = '{{ url()->route('ventas.index') }}';
+                    });
                 },
                 error: function(xhr, status, error) {
                     console.error('Error en la solicitud AJAX:', error);

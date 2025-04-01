@@ -24,16 +24,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('ventas', VentaController::class);
-Route::post('/obtener-stock', [VentaController::class, 'obtenerStock']);
-
-
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [HomeController::class, 'home']);
 	Route::get('dashboard', function () {
 		return view('dashboard');
 	})->name('dashboard');
+
+	Route::resource('ventas', VentaController::class);
+	Route::post('/obtener-stock', [VentaController::class, 'obtenerStock']);
 
 	Route::get('billing', function () {
 		return view('billing');
