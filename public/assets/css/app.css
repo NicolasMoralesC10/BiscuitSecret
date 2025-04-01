@@ -52,17 +52,6 @@
   font-size: 2px;
 }
 
-.edit-button:hover::before {
-  display: block;
-  padding-right: 10px;
-  font-size: 13px;
-  opacity: 1;
-  transform: translateX(0px);
-  transition-duration: 0.3s;
-}
-
-
-
   /* From Uiverse.io by vinodjangid07 */ 
 .buttonDel {
   width: 42px;
