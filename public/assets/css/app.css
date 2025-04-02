@@ -1,7 +1,7 @@
 /* From Uiverse.io by aaronross1 */ 
 .edit-button {
-  width: 43px;
-  height: 43px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   border: none;
   font-weight: 600;
@@ -54,8 +54,8 @@
 
   /* From Uiverse.io by vinodjangid07 */ 
 .buttonDel {
-  width: 42px;
-  height: 42px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background-color: rgb(20, 20, 20);
   border: none;
@@ -108,3 +108,4 @@
   transform: translateY(30px);
   transition-duration: .3s;
 }
+

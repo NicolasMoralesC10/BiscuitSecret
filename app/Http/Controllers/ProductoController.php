@@ -10,7 +10,10 @@ class ProductoController extends Controller
     public function index()
     {
 
-        $productos = Productos::paginate(6);
+        $productos = Productos::orderByRaw('estado = 1 DESC') 
+            ->orderBy('nombre', 'asc') 
+            ->paginate(6); 
+
         return view('productos.index', compact('productos'));
     }
 

@@ -8,6 +8,20 @@
             <h6 class="mb-0">{{ __('Editar Producto') }}</h6>
         </div>
         <div class="card-body pt-4 p-3">
+            <!-- Modal -->
+            <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header bg-gradient-primary">
+                            <h5 class="modal-title" id="imageModalLabel">Imagen</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <img id="modalImage" src="" class="img-fluid" alt="Imagen">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <form action="{{ route('productos.update', $producto) }}" method="POST" role="form text-left" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -55,7 +69,9 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="user-email" class="form-control-label">Imagen</label>
+                            <label for="user-email" class="form-control-label">Imagen</label> <button type="button" class="" style="border: none; background:transparent;box-shadow:none;color: #67748e;font-size:0.7rem" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-url="{{ asset('storage/' . $producto->imagen) }}" data-title-img="{{ $producto->nombre }}">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
                             <div class="@error('image')border border-danger rounded-3 @enderror">
                                 <input class="form-control" value="" type="file" accept="image/*" name="imagen">
                                 @error('image')

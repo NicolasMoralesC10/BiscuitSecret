@@ -16,6 +16,23 @@
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-gradient-primary">
+                                        <h5 class="modal-title" id="imageModalLabel">Imagen</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <img id="modalImage" src="" class="img-fluid" alt="Imagen">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <table class="table align-items-center mb-0">
                             <thead class="text-center">
                                 <tr>
@@ -59,7 +76,10 @@
                                     </td>
                                     <td>
                                         <div>
-                                            <img src="{{ asset('storage/' . $producto->imagen) }}" class="avatar avatar-lg me-3">
+                                            <img src="{{ asset('storage/' . $producto->imagen) }}" class="avatar avatar-lg ">
+                                            <button type="button" class="btn" style="border: none; background:transparent;box-shadow:none;" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-url="{{ asset('storage/' . $producto->imagen) }}" data-title-img="{{ $producto->nombre }}">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </button>
                                         </div>
                                     </td>
                                     @if ($producto->estado == 1)
@@ -89,7 +109,6 @@
                                             <!-- <button type="button" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Eliminar Producto" style="border: none; background: transparent;" onclick="confirmDelete({{ $producto->id }})">
                                                 <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                             </button> -->
-                                            <!-- From Uiverse.io by vinodjangid07 -->
                                             <button type="button" class="buttonDel bg-gradient-primary" onclick="confirmDelete({{ $producto->id }})">
                                                 <svg viewBox="0 0 448 512" class="svgIcon">
                                                     <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>

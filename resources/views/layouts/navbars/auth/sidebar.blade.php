@@ -62,9 +62,9 @@
         </a>
       </li>
       <li class="nav-item pb-2">
-        <a class="nav-link {{ (Request::is('productos') || Request::is('productos/create') ? 'active' : '') }}" href="{{ url('productos') }}">
+        <a class="nav-link {{ (Request::is('productos') || Request::is('productos/create') || Request::is('productos/edit') ? 'active' : '') }}" href="{{ url('productos') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i style="font-size: 1rem;" class="fa-solid fa-boxes-stacked ps-2 pe-2 text-center text-dark {{ (Request::is('productos') || Request::is('productos/create') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
+            <i style="font-size: 1rem;" class="fa-solid fa-boxes-stacked ps-2 pe-2 text-center text-dark {{ (Request::is('productos') || Request::is('productos/create') || Request::is('productos/edit') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
           </div>
           <span class="nav-link-text ms-1">Productos</span>
         </a>
