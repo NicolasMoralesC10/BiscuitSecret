@@ -158,7 +158,7 @@
                     <!-- <div class="container-fluid"> -->
                         <div class="row">
                             <div class="col-12">
-                                <div class="card mb-4 shadow-lg">
+                                <div class="card mb-4 shadow-lg" id="card-table">
                                     <!-- <div class="card-header">
                                           <h6>Productos</h6>
                                         </div> -->
@@ -256,6 +256,8 @@
 <script>
     $(document).ready(function() {
 
+         $("#card-table").hide();
+
         // -----------------------------------
         //    VERIFICAR PRODUCTOS DISPONIBLES
         // -----------------------------------
@@ -347,6 +349,7 @@
                     text: 'El producto ya está en la tabla de productos seleccionados.',
                 });
             } else {
+               $("#card-table").show();
                 let nuevaFila = `<tr>
                                  	<td>
 													<div class="d-flex px-2 py-1">
@@ -419,21 +422,16 @@
 
         $(document).on('input', 'input[name="cantidad[]"]', function() {
             var id_pro = $(this).closest('tr').find("input[name='producto_id[]']").val();
-            validarCantidad(this, id_pro);
+            validarStockMax(this, id_pro);
+        });
+        
+        $(document).on('blur', 'input[name="cantidad[]"]', function() {
+            var id_pro = $(this).closest('tr').find("input[name='producto_id[]']").val();
+            validarCantidadCero(this);
         });
 
-        function validarCantidad(campo, id_pro) {
+        function validarStockMax(campo, id_pro) {
             var cantidad = $(campo).val();
-
-            if (isNaN(cantidad) || cantidad.trim() === '' || cantidad <= 0) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: '¡Cantidad no válida!',
-                    text: 'La cantidad debe ser mayor a cero.',
-                });
-                $(campo).val('');
-                return;
-            } 
 
             $.ajax({
                 url: '{{ url("/obtener-stock") }}',
@@ -473,6 +471,20 @@
                 }
             });
         }
+        
+        function validarCantidadCero(campo) {
+            var cantidad = $(campo).val();
+
+            if (isNaN(cantidad) || cantidad.trim() === '' || cantidad <= 0) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '¡Cantidad no válida!',
+                    text: 'La cantidad debe ser mayor a cero.',
+                });
+                $(campo).val('');
+                return;
+            } 
+        }
 
         // -----------------------------------
         //    ELIMINAR FILA DE TABLA
@@ -484,6 +496,10 @@
             $('#dinero-recibido').val('');
             $('#cambio').val('');
             $("#cantidad").focus();
+            var filas = $("#tabla-productos tbody tr").length;
+            if (filas === 0) {
+               $("#card-table").hide();
+            }
         });
 
         // -----------------------------------

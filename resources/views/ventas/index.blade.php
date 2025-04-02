@@ -29,7 +29,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        No.
+                                        #
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Productos
@@ -51,25 +51,39 @@
                             <tbody>
                                     @foreach ($ventas as $venta)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td class="ps-4">
+                                                <p class="text-xs font-weight-bold mb-0">
+                                                    {{ ++$i }}
+                                                </p>
+                                            </td>
                                             
                                             @if ($venta->productos->isNotEmpty())
-                                             <td>
-                                                {{ implode(', ', $venta->productos->pluck('nombre')->toArray()) }}
-                                             </td>
-                                             @else
-                                                 <td>No hay productos asociados a esta venta.</td>
-                                             @endif
+                                                <td class="text-center">
+                                                   <p class="text-xs font-weight-bold mb-0">
+                                                      {{ implode(', ', $venta->productos->pluck('nombre')->toArray()) }}
+                                                   </p>
+                                                </td>
+                                            @else
+                                               <td class="text-center">
+                                                   <p class="text-xs font-weight-bold mb-0">
+                                                      No hay productos asociados a esta venta.
+                                                   </p>
+                                               </td>
+                                            @endif
                                             
                                             
 
                                             <!-- <td >{{ $venta->cantidad }}</td> -->
-										              <td >{{ $venta->total }}</td>
+										              <td class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0">
+                                                 {{ $venta->total }}
+                                                </p>
+                                             </td>
 
-                                            <td>
+                                            <td class="text-center">
                                                 <form action="{{ route('ventas.destroy', $venta->id_venta) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('ventas.show', $venta->id_venta) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('ventas.edit', $venta->id_venta) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <!-- <a class="btn btn-sm btn-primary " href="{{ route('ventas.show', $venta->id_venta) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('ventas.edit', $venta->id_venta) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a> -->
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
