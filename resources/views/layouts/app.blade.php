@@ -36,10 +36,10 @@
     Soft UI Dashboard by Creative Tim
   </title>
   
-  <!--  jQuery CSS -->
+  <!-- jQuery CSS -->
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-  <!--     Fonts and icons     -->
+  <!-- Fonts and icons -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
   <link href="{{ asset( '../assets/css/nucleo-icons.css') }}" rel="stylesheet" />

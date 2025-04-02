@@ -12,7 +12,7 @@ class VentaController extends Controller
     public function index(Request $request)
     {
         /* $ventas = Venta::with('productos')->paginate(10); */
-        $ventas = Venta::with('productos')->where('estado', 1)->paginate(10);
+        $ventas = Venta::with('productos')->where('estado', 1)->paginate(2);
 
         /* $ventas = Venta::paginate();
         $prod_ventas = Venta::productos(); 

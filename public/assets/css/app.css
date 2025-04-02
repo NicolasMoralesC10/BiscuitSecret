@@ -108,3 +108,13 @@
     transform: translateY(30px);
     transition-duration: 0.3s;
 }
+
+/* Total ventas */
+.badge-custom {
+    background-color: rgb(62, 156, 84);
+    padding: 3px 8px;
+    border-radius: 20px;
+    /* color: white;
+    font-size: 0.7rem;
+    font-weight: bold; */
+}
