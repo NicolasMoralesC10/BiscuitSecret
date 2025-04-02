@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('template_title')
-    {{ __('Update') }} User
-@endsection
+@extends('layouts.user_type.auth')
 
 @section('content')
     <section class="content container-fluid">
@@ -11,7 +7,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} User</span>
+                        <span class="card-title"><strong>Actualizar usuario</strong></span>
                     </div>
                     <div class="card-body bg-white">
                         <form method="POST" action="{{ route('users.update', $user->id) }}"  role="form" enctype="multipart/form-data">

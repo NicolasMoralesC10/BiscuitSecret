@@ -49,6 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('tables');
 	})->name('tables');
 	Route::resource('users', UserController::class);
+	Route::resource('user', InfoUserController::class);
     Route::get('virtual-reality', function () {
 		return view('virtual-reality');
 	})->name('virtual-reality');

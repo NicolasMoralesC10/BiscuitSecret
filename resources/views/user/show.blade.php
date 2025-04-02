@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('template_title')
-    {{ $user->name ?? __('Show') . " " . __('User') }}
-@endsection
+@extends('layouts.user_type.auth')
 
 @section('content')
     <section class="content container-fluid">
@@ -11,10 +7,10 @@
                 <div class="card">
                     <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} User</span>
+                            <h1><strong class="card-title">Usuario</strong></h1>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary btn-sm" href="{{ route('users.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary btn-sm" href="{{ route('users.index') }}"> Volver</a>
                         </div>
                     </div>
 

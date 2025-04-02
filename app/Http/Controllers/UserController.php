@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class UserController extends Controller
@@ -16,7 +17,7 @@ class UserController extends Controller
      */
     public function index(Request $request): View
     {
-        $users = User::paginate();
+        $users = User::paginate(6);
 
         return view('user.index', compact('users'))
             ->with('i', ($request->input('page', 1) - 1) * $users->perPage());
@@ -35,12 +36,20 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        User::create($request->validated());
-
+        $attributes = request()->validate([
+            'name' => ['required', 'max:50'],
+            'email' => ['required', 'email', 'max:50', Rule::unique('users', 'email')],
+            'password' => ['required', 'min:5', 'max:20'],
+            'phone' => ['max:50'],
+            'location' => ['max:70'],
+            'about_me' => ['max:150'], 
+            ]);
+        $attributes['password'] = bcrypt($attributes['password'] );
+        User::create($attributes);
         return Redirect::route('users.index')
-            ->with('success', 'User created successfully.');
+            ->with('success', 'Usuario agregado correctamente.');
     }
 
     /**
@@ -66,12 +75,18 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequest $request, User $user): RedirectResponse
+    public function update(Request $request, User $user): RedirectResponse
     {
-        $user->update($request->validated());
+        $user->update(request()->validate([
+            'name' => ['required', 'max:50'],
+            'email' => ['required', 'email', 'max:50'],
+            'phone' => ['max:50'],
+            'location' => ['max:70'],
+            'about_me' => ['max:150'], 
+            ]));
 
         return Redirect::route('users.index')
-            ->with('success', 'User updated successfully');
+            ->with('success', 'Usuario actualizado correctamente');
     }
 
     public function destroy($id): RedirectResponse
@@ -79,6 +94,6 @@ class UserController extends Controller
         User::find($id)->delete();
 
         return Redirect::route('users.index')
-            ->with('success', 'User deleted successfully');
+            ->with('success', 'Usuario eliminado correctamente.');
     }
 }
