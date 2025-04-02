@@ -42,16 +42,6 @@
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         <h3 class="text-sm font-weight-bold mb-0">
-                                            Ubicación
-                                        </h3>
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        <h3 class="text-sm font-weight-bold mb-0">
-                                            Sobre mí
-                                        </h3>
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        <h3 class="text-sm font-weight-bold mb-0">
                                             Fecha de creación
                                         </h3>
                                     </th>
@@ -69,8 +59,6 @@
                                             <td class="text-center"><p class="text-xs font-weight-bold mb-0">{{ $user->name }}</p></td>
                                             <td class="text-center"><p class="text-xs font-weight-bold mb-0">{{ $user->email }}</p></td>
                                             <td class="text-center"><p class="text-xs font-weight-bold mb-0">{{ $user->phone }}</p></td>
-                                            <td class="text-center"><p class="text-xs font-weight-bold mb-0">{{ $user->location }}</p></td>
-                                            <td class="text-center"><p class="text-xs font-weight-bold mb-0">{{ $user->about_me }}</p></td>
                                             <td class="text-center"><p class="text-xs font-weight-bold mb-0">{{ $user->created_at }}</p></td>
                                             <td class="text-center">
                                                 <a href="{{ route('users.edit', $user->id) }}">

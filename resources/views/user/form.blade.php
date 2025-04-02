@@ -21,7 +21,7 @@
             {!! $errors->first('password', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
     @else
     <div class="col-md-4">
     @endif    
@@ -31,25 +31,6 @@
                 {!! $errors->first('phone', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="form-group mb-2 mb20">
-            <label for="location" class="form-label">{{ __('Ubicación') }}</label>
-            <input type="text" name="location" class="form-control @error('location') is-invalid @enderror" value="{{ old('location', $user?->location) }}" id="location" placeholder="Ubicación">
-            {!! $errors->first('location', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-    </div>
-    @if (!$user->id)
-    <div class="col-md-12">
-    @else
-    <div class="col-md-6">
-    @endif
-        <div class="form-group mb-2 mb20">
-            <label for="about_me" class="form-label">{{ __('Acerca de mí') }}</label>
-            <input type="text" name="about_me" class="form-control @error('about_me') is-invalid @enderror" value="{{ old('about_me', $user?->about_me) }}" id="about_me" placeholder="Acerca de mí">
-            {!! $errors->first('about_me', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-    </div>
-    
 
     </div>
     <div class="col-md-12 mt20 mt-2">
