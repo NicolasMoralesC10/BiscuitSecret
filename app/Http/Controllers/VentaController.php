@@ -11,7 +11,8 @@ class VentaController extends Controller
 {
     public function index(Request $request)
     {
-        $ventas = Venta::with('productos')->paginate(10);
+        /* $ventas = Venta::with('productos')->paginate(10); */
+        $ventas = Venta::with('productos')->where('estado', 1)->paginate(10);
 
         /* $ventas = Venta::paginate();
         $prod_ventas = Venta::productos(); 
@@ -52,11 +53,11 @@ class VentaController extends Controller
     {
         try {
             foreach ($request->producto_id as $index => $id) {
-            $producto = Producto::find($id);
-            if ($producto['cantidad'] < $request->cantidad[$index]){
-                return Redirect::route('ventas.index')
-                ->with('error', 'La cantidad del producto '. $producto->nombre . ' excede el stock.');
-            }
+               $producto = Producto::find($id);
+               if ($producto['cantidad'] < $request->cantidad[$index]){
+                   return Redirect::route('ventas.index')
+                   ->with('error', 'La cantidad del producto '. $producto->nombre . ' excede el stock.');
+               }
             }
             /* $venta = Venta::create($request->only(['total'])); */
         
@@ -104,6 +105,36 @@ class VentaController extends Controller
     // Método para eliminar un producto
     public function destroy($id)
     {
-        return "Eliminando producto con ID: " . $id;
+      /* $venta = Venta::find($id);
+      $productos = $venta->productos()->get();
+
+      echo json_encode($productos); */
+
+      $venta = Venta::with('productos')->find($id);
+      $productos = $venta->productos;
+
+      foreach ($productos as $index => $producto) {
+          $IDes_prods[$index] = $producto->pivot->productos_id_producto; // Acceder a campos de la tabla pivote
+          /* echo $IDes_prods[$index] . "</br>"; */
+      }
+         
+      /* echo json_encode($productos); */
+
+        $venta = Venta::find($id);
+
+        $venta->update([
+            'estado' => 0
+        ]);
+
+        /* $productos_venta = Venta::with('productos')->where('ventas_id_venta', $id)->get(); */
+
+        foreach ($IDes_prods as $index => $id) {
+         // updateExistingPivot :: permite actualizar campos específicos en una relación existente sin crear una nueva relación si no existe
+         $venta->productos()->updateExistingPivot($id, [
+              'estado' => 0
+          ]);
+        }
+
+        return redirect()->route('ventas.index');
     }
 }

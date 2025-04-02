@@ -230,7 +230,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="cambio">Cambio</label>
-                                <input type="text" class="form-control" id="cambio" placeholder="Dinero a devolver" readonly>
+                                <input type="text" class="form-control" id="cambio" placeholder="Cambio" readonly>
                             </div>
                         </div>
                         </div>
@@ -381,7 +381,7 @@
 
                                     <td style="text-align: center;">
 													<div class="pt-3">
-														<button type="button"class="btn btn-danger btn-sm eliminar-fila">
+														<button type="button" class="btn btn-danger btn-sm eliminar-fila">
 															<i class="fas fa-trash"></i>
 														</button>
                                        </div>
