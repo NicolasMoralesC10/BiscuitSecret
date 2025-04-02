@@ -43,8 +43,6 @@ class UserController extends Controller
             'email' => ['required', 'email', 'max:50', Rule::unique('users', 'email')],
             'password' => ['required', 'min:5', 'max:20'],
             'phone' => ['max:50'],
-            'location' => ['max:70'],
-            'about_me' => ['max:150'], 
             ]);
         $attributes['password'] = bcrypt($attributes['password'] );
         User::create($attributes);
@@ -81,8 +79,6 @@ class UserController extends Controller
             'name' => ['required', 'max:50'],
             'email' => ['required', 'email', 'max:50'],
             'phone' => ['max:50'],
-            'location' => ['max:70'],
-            'about_me' => ['max:150'], 
             ]));
 
         return Redirect::route('users.index')

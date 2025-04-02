@@ -4,8 +4,8 @@ function confirmDeleteUser(id, name) {
         text: "No podrás revertir esta acción!",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
+        confirmButtonColor: "#6e7881",
+        cancelButtonColor: "#7066e0",
         cancelButtonText: "Cancelar",
         confirmButtonText: "Sí, eliminar",
     }).then((result) => {
