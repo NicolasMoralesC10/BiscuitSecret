@@ -67,7 +67,6 @@
     transition-duration: 0.3s;
     overflow: hidden;
     position: relative;
-    margin-left: 5%;
 }
 
 .svgIcon {
@@ -80,6 +79,7 @@
 }
 
 .buttonDel:hover {
+    margin-left: 30%;
     width: 140px;
     border-radius: 50px;
     transition-duration: 0.3s;
@@ -96,7 +96,7 @@
 .buttonDel::before {
     position: absolute;
     top: -20px;
-    content: "Delete";
+    content: "Eliminar";
     color: white;
     transition-duration: 0.3s;
     font-size: 2px;

@@ -167,8 +167,8 @@
                                             <table class="table align-items-center mb-0" id="tabla-productos">
                                                 <thead>
                                                     <tr>
-                                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Producto</th>
-                                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Cantidad</th>
+                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Producto</th>
+                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cantidad</th>
                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Precio</th>
                                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ELiminar</th>
                                                         <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Producto</th>
@@ -236,7 +236,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Guardar' }}</button>
+                            <button type="submit" class="btn bg-gradient-dark btn-md mt-2 mb-2">{{ 'Guardar' }}</button>
                         </div>
                     </div>
                 </form>
@@ -265,7 +265,7 @@
         // Se convierte la variable de PHP $productos a un formato JSON que es manejable en JavaScript
         var availableProducts = @json($productos -> map(function($producto) {
             return [
-                'value' => $producto -> id_producto,
+                'value' => $producto -> id,
                 'label' => $producto -> nombre,
                 'precio' => $producto -> precio
             ];    
@@ -281,6 +281,11 @@
             select: function(event, ui) {
                 agregarProducto(ui.item.value, ui.item.label, ui.item.precio);
                 $("#product").val('');
+                return false;
+            },
+            focus: function(event, ui) {
+                // Cuando el usuario mueve el cursor (con la flecha hacia abajo) en la lista de sugerencias
+                $("#product").val(ui.item.label); // Establece el nombre del producto como valor mientras navega por las sugerencias
                 return false;
             }
         });
@@ -439,7 +444,7 @@
                 data: {
                     action: 'obtener_stock',
                     id_pro: id_pro,
-						  _token: '{{ csrf_token() }}',  // Incluir el token CSRF para protección
+					_token: '{{ csrf_token() }}',  // Incluir el token CSRF para protección
                 },
                 dataType: 'json',
                 success: function(data) {

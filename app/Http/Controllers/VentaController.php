@@ -14,10 +14,6 @@ class VentaController extends Controller
         /* $ventas = Venta::with('productos')->paginate(10); */
         $ventas = Venta::with('productos')->where('estado', 1)->paginate(2);
 
-        /* $ventas = Venta::paginate();
-        $prod_ventas = Venta::productos(); 
-        $productos = Producto::all(['id_producto','nombre']); */
-
         return view('ventas.index', compact('ventas'))
             ->with('i', ($request->input('page', 1) - 1) * $ventas->perPage());
     }
@@ -70,7 +66,7 @@ class VentaController extends Controller
                 $producto = Producto::find($id);
                 $subtotal = $producto['precio']*$request->cantidad[$index];
                 $newStock = $producto['cantidad']-$request->cantidad[$index];
-                Producto::where('id_producto', $id)->update(['cantidad'=>$newStock]);
+                Producto::where('id', $id)->update(['cantidad'=>$newStock]);
                 $venta->productos()->attach($id, [
                     //Se usa ?? 1 para asignar un valor predeterminado si no se encuentra el índice.
                     'cantidad' => $request->cantidad[$index] ?? 1,

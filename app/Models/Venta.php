@@ -17,8 +17,6 @@ class Venta extends Model
         'updated_at' */
     ];
 
-    protected $primaryKey = 'id_venta';
-
     public function productos()
     {
         return $this->belongsToMany(Producto::class, 'ventas_has_productos', 'ventas_id_venta', 'productos_id_producto')
