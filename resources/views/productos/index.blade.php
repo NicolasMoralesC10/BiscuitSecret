@@ -36,31 +36,31 @@
                         <table class="table align-items-center mb-0">
                             <thead class="text-center">
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
                                         Nombre
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
                                         Descripcion
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
                                         Precio
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
                                         Cantidad
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
                                         Imagen
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
                                         Estado
                                     </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
                                         Action
                                     </th>
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                @foreach ($productos as $producto)
+                                @forelse($productos as $producto)
                                 <tr>
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">{{ $producto->nombre }}</p>
@@ -76,9 +76,9 @@
                                     </td>
                                     <td>
                                         <div>
-                                            <img src="{{ asset('storage/' . $producto->imagen) }}" class="avatar avatar-lg ">
-                                            <button type="button" class="btn" style="border: none; background:transparent;box-shadow:none;" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-url="{{ asset('storage/' . $producto->imagen) }}" data-title-img="{{ $producto->nombre }}">
-                                                <i class="fa-solid fa-eye"></i>
+
+                                            <button type="button" class="btn" style="border: none; background:transparent;box-shadow:none;padding:0%;margin:0" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-url="{{ asset('storage/' . $producto->imagen) }}" data-title-img="{{ $producto->nombre }}" >
+                                                <img src="{{ asset('storage/' . $producto->imagen) }}" class="avatar avatar-lg ">
                                             </button>
                                         </div>
                                     </td>
@@ -117,7 +117,13 @@
                                         </form>
                                     </td>
                                 </tr>
-                                @endforeach
+                                @empty
+                                <tr>
+                                    <td colspan="7" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
+                                        No hay registros en la tabla.
+                                    </td>
+                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
                         <div class="pagination-container">
