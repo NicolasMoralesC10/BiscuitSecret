@@ -76,7 +76,6 @@
                                     </td>
                                     <td>
                                         <div>
-
                                             <button type="button" class="btn" style="border: none; background:transparent;box-shadow:none;padding:0%;margin:0" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-url="{{ asset('storage/' . $producto->imagen) }}" data-title-img="{{ $producto->nombre }}" >
                                                 <img src="{{ asset('storage/' . $producto->imagen) }}" class="avatar avatar-lg ">
                                             </button>
