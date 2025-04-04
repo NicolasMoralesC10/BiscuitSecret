@@ -17,7 +17,7 @@
                             <div>
                                 <label for="email">Correo</label>
                                 <div class="">
-                                    <input id="email" name="email" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
+                                    <input id="email" name="email" type="email" class="form-control" placeholder="Correo" aria-label="Email" aria-describedby="email-addon">
                                     @error('email')
                                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
@@ -26,7 +26,7 @@
                             <div>
                                 <label for="password">Nueva contraseña</label>
                                 <div class="">
-                                    <input id="password" name="password" type="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon">
+                                    <input id="password" name="password" type="password" class="form-control" placeholder="Contraseña" aria-label="Password" aria-describedby="password-addon">
                                     @error('password')
                                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
@@ -35,7 +35,7 @@
                             <div>
                                 <label for="password_confirmation">Confirmar Contraseña</label>
                                 <div class="">
-                                    <input id="password-confirmation" name="password_confirmation" type="password" class="form-control" placeholder="Password-confirmation" aria-label="Password-confirmation" aria-describedby="Password-addon">
+                                    <input id="password-confirmation" name="password_confirmation" type="password" class="form-control" placeholder="Confirme la contraseña" aria-label="Password-confirmation" aria-describedby="Password-addon">
                                     @error('password')
                                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
