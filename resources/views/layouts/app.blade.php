@@ -56,11 +56,11 @@
   @endguest
 
   @if(session()->has('success'))
-  <div x-data="{ show: true}"
+<!--   <div x-data="{ show: true}"
     x-show="show"
     class="position-fixed bg-success rounded right-3 text-sm py-2 px-4" id="parrafo">
     <p class="m-0">{{ session('success')}}</p>
-  </div>
+  </div> -->
 
   @endif
   <!--   Core JS Files   -->
