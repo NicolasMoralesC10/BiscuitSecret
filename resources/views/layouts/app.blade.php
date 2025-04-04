@@ -55,14 +55,7 @@
   @yield('guest')
   @endguest
 
-  @if(session()->has('success'))
-  <div x-data="{ show: true}"
-    x-show="show"
-    class="position-fixed bg-success rounded right-3 text-sm py-2 px-4" id="parrafo">
-    <p class="m-0">{{ session('success')}}</p>
-  </div>
 
-  @endif
   <!--   Core JS Files   -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
@@ -86,9 +79,11 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-    let parrafo = document.querySelector('#parrafo');
-    setTimeout(() => 
-    parrafo.remove() , 2000);
+    if (document.querySelector('#parrafo')){
+      let parrafo = document.querySelector('#parrafo');
+      setTimeout(() => 
+      parrafo.remove() , 2000);
+    }
   </script>
 
   <!-- Github buttons -->

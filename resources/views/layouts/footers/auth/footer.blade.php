@@ -6,7 +6,7 @@
                     © <script>
                         document.write(new Date().getFullYear())
                     </script>, made by
-                    <a class="font-weight-bold" target="_blank">Juan Steban Gonzalez Diaz</a>, <a class="font-weight-bold" target="_blank">Sean Paul Moreno </a>&amp; <a style="color: #252f40;" class="font-weight-bold ml-1" target="_blank">Nicolas Morales Contreras.</a>
+                    <a class="font-weight-bold" target="_blank">Juan Steban Gonzalez Diaz</a>, <a class="font-weight-bold" target="_blank">Sean Paul Moreno </a>&amp; <a class="font-weight-bold ml-1" target="_blank">Nicolas Morales Contreras.</a>
                 </div>
             </div>
         </div>

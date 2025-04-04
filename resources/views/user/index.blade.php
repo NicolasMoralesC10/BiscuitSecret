@@ -53,6 +53,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ($users)
                                     @foreach ($users as $user)
                                         <tr>
                                             <td class="text-center"><p class="text-xs font-weight-bold mb-0">{{ ++$i }}</p></td>
@@ -80,7 +81,11 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                </tbody>
+                                @else
+                                <tr>
+                                    <td colspan="6" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder"></td>No hay usuarios registrados.</tr>
+                                @endif
+                            </tbody>
                         </table>
                         <div class="pagination-container">
                             {{ $users->links('pagination::bootstrap-4') }}
