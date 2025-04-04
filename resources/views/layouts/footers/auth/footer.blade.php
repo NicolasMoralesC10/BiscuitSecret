@@ -1,5 +1,5 @@
 <footer class="footer pt-3  ">
-
+<!-- 
     <script>
         function confirmDelete(id) {
             Swal.fire({
@@ -30,7 +30,7 @@
                 imageModalLabel.innerHTML = imageLabel;
             });
         });
-    </script>
+    </script> -->
     <div class="container-fluid">
         <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">

@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Productos;
+use App\Models\Producto; // Asegúrate de que el nombre del modelo sea correcto
 
 class ProductoController extends Controller
 {
     public function index()
     {
 
-        $productos = Productos::orderByRaw('estado = 1 DESC') 
-            ->orderBy('nombre', 'asc') 
-            ->paginate(6); 
+        $productos = Producto::orderByRaw('estado = 1 DESC')
+            ->orderBy('nombre', 'asc')
+            ->paginate(6);
 
         return view('productos.index', compact('productos'));
     }
@@ -47,16 +47,16 @@ class ProductoController extends Controller
             $data['imagen'] = $path;
         }
 
-        Productos::create($data);
+        Producto::create($data);
         return redirect()->route('productos.index');
     }
 
-    public function edit(Productos $producto)
+    public function edit(Producto $producto)
     {
         return view('productos.edit', compact('producto'));
     }
 
-    public function update(Request $request, Productos $producto)
+    public function update(Request $request, Producto $producto)
     {
         $data = $request->validate([
             'nombre' => 'required',
@@ -79,7 +79,7 @@ class ProductoController extends Controller
         return redirect()->route('productos.index');
     }
 
-    public function destroy(Productos $producto)
+    public function destroy(Producto $producto)
     {
         $producto->delete();
 

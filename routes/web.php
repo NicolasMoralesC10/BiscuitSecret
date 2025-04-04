@@ -9,7 +9,9 @@ use App\Http\Controllers\SessionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\VentaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +28,10 @@ use App\Http\Controllers\UserController;use App\Http\Controllers\ProductoControl
 Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/', [HomeController::class, 'home']);
-	Route::get('dashboard', function () {
-		return view('dashboard');
-	})->name('dashboard');
+	Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
+
+	Route::resource('ventas', VentaController::class);
+	Route::post('/obtener-stock', [VentaController::class, 'obtenerStock']);
 
 	Route::get('billing', function () {
 		return view('billing');
@@ -57,7 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('tables');
 	})->name('tables');
 	Route::resource('users', UserController::class);
-    Route::get('virtual-reality', function () {
+	Route::get('virtual-reality', function () {
 		return view('virtual-reality');
 	})->name('virtual-reality');
 

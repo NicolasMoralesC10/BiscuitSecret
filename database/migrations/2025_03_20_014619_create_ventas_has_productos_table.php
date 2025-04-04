@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ventas_has_productos', function (Blueprint $table) {
-            $table->increments('id_venta_producto');
+            $table->increments('id');
             $table->unsignedInteger('ventas_id_venta');
             $table->unsignedInteger('productos_id_producto');
             $table->integer('cantidad');
@@ -21,7 +21,7 @@ return new class extends Migration
 
             // Llaves foráneas
             $table->foreign('ventas_id_venta')
-                ->references('id_venta')->on('ventas')
+                ->references('id')->on('ventas')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
             $table->foreign('productos_id_producto')
