@@ -166,34 +166,34 @@ class VentaController extends Controller
     // Método para eliminar un producto
     public function destroy($id)
     {
-      /* $venta = Venta::find($id);
-      $productos = $venta->productos()->get();
-
-      echo json_encode($productos); */
-
       $venta = Venta::with('productos')->find($id);
       $productos = $venta->productos;
+      
+        /* $productos_venta = Venta::with('productos')->where('ventas_id_venta', $id)->get(); */
 
       foreach ($productos as $index => $producto) {
           $IDes_prods[$index] = $producto->pivot->productos_id_producto; // Acceder a campos de la tabla pivote
           /* echo $IDes_prods[$index] . "</br>"; */
       }
-         
-      /* echo json_encode($productos); */
 
         $venta = Venta::find($id);
-
         $venta->update([
             'estado' => 0
         ]);
 
-        /* $productos_venta = Venta::with('productos')->where('ventas_id_venta', $id)->get(); */
 
-        foreach ($IDes_prods as $index => $id) {
+        foreach ($IDes_prods as $index => $id) {  
+
          // updateExistingPivot :: permite actualizar campos específicos en una relación existente sin crear una nueva relación si no existe
          $venta->productos()->updateExistingPivot($id, [
               'estado' => 0
           ]);
+        }
+          
+        $prod = Producto::find($id);        
+        foreach ($productos as $index => $producto) {
+            $newStock = $prod->cantidad + $producto->pivot->cantidad;
+            Producto::where('id', $id)->update(['cantidad' => $newStock]); // Actualizar el stock del producto
         }
 
         return redirect()->route('ventas.index');

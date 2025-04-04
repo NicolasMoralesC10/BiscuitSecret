@@ -75,9 +75,9 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Sales</p>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Ventas</p>
                 <h5 class="font-weight-bolder mb-0">
-                  $103,430
+                  ${{ $totalVentas }}
                   <span class="text-success text-sm font-weight-bolder">+5%</span>
                 </h5>
               </div>
@@ -93,7 +93,7 @@
     </div>
   </div>
   <div class="row mt-4">
-    <div class="col-lg-7 mb-lg-0 mb-4">
+    <!-- <div class="col-lg-7 mb-lg-0 mb-4">
       <div class="card">
         <div class="card-body p-3">
           <div class="row">
@@ -134,10 +134,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
   <div class="row mt-4">
-    <div class="col-lg-5 mb-lg-0 mb-4">
+    <!-- <div class="col-lg-5 mb-lg-0 mb-4">
       <div class="card z-index-2">
         <div class="card-body p-3">
           <div class="bg-gradient-dark border-radius-lg py-3 pe-1 mb-3">
@@ -252,8 +252,8 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-7">
+    </div> -->
+    <!-- <div class="col-lg-7">
       <div class="card z-index-2">
         <div class="card-header pb-0">
           <h6>Sales overview</h6>
@@ -268,9 +268,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
-  <div class="row my-4">
+
+  <!-- <div class="row my-4">
     <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
       <div class="card">
         <div class="card-header pb-0">
@@ -614,7 +615,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 @endsection
 @push('dashboard')

@@ -13,7 +13,7 @@
       <div class="col-12">
          <div class="card mb-4 mx-4">
             <div class="card-header pb-2">
-               <div class="d-flex flex-row justify-content-start">
+               <div class="d-flex flex-row justify-content-between">
                   <div class="ms-3">
                      <h5 class="mb-0">Ventas</h5>
                   </div>
