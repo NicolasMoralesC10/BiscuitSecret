@@ -32,26 +32,26 @@
       <li class="nav-item mt-2">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Administración</h6>
       </li>
-      <li class="nav-item pb-2">
+           <li class="nav-item pb-2">
         <a class="nav-link {{ (Route::currentRouteName() == 'users.index' || 
                 Route::currentRouteName() == 'users.create' || 
                 Route::currentRouteName() == 'users.edit' || 
                 Route::currentRouteName() == 'users.show' ? 'active' : '') }}" href="{{ url('users') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Route::currentRouteName() == 'users.index' || 
+          <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Route::currentRouteName() == 'users.index' || 
                 Route::currentRouteName() == 'users.create' || 
                 Route::currentRouteName() == 'users.edit' || 
                 Route::currentRouteName() == 'users.show' ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
-            </div>
-            <span class="nav-link-text ms-1">Usuarios</span>
+          </div>
+          <span class="nav-link-text ms-1">Usuarios</span>
         </a>
       </li>
-        <a class="nav-link {{ (Request::is('user-management') ? 'active' : '') }}" href="{{ url('user-management') }}">
-          <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('user-management') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
-          </div>
-          <span class="nav-link-text ms-1">User Management</span>
-        </a>
+      <a class="nav-link {{ (Request::is('user-management') ? 'active' : '') }}" href="{{ url('user-management') }}">
+        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+          <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('user-management') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
+        </div>
+        <span class="nav-link-text ms-1">User Management</span>
+      </a>
       </li>
       <li class="nav-item pb-2">
         <a class="nav-link {{ (Route::currentRouteName() == 'productos.index' || 
