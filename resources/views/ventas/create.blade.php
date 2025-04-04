@@ -2,13 +2,13 @@
 
 @section('content')
 <div>
-   <div class="container-fluid alert alert-secondary mx-4 bg-gradient-primary text-center" role="alert">
+   <div class="alert alert-secondary mx-4 bg-gradient-primary text-center" role="alert">
          <strong class="text-white">
             ¡Administra tu flujo de Ventas! Revisa, crea y elimina ventas al instante.
          </strong>
    </div>
     
-    <div class="container-fluid py-4">
+    <div class="container-fluid ps-4 pb-4 pe-4">
         <div class="card">
             <div class="card-header pb-0 px-3">
                 <h6 class="mb-0">{{ __('Nueva Venta') }}</h6>
@@ -535,7 +535,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '{{ route('ventas.store') }}', // Usar route() si tienes una ruta definida
+                url: '{{ route('ventas.store') }}', // Usar route() si hay una ruta definida
                 data: formData,
                 processData: false,
                 contentType: false,

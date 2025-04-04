@@ -9,9 +9,9 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Money</p>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Ventas</p>
                 <h5 class="font-weight-bolder mb-0">
-                  $53,000
+                ${{ $reportes['totalVentas'] }}
                   <span class="text-success text-sm font-weight-bolder">+55%</span>
                 </h5>
               </div>
@@ -31,9 +31,9 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Productos en Venta</p>
                 <h5 class="font-weight-bolder mb-0">
-                  2,300
+                {{ $reportes['productosEnVenta'] }}
                   <span class="text-success text-sm font-weight-bolder">+3%</span>
                 </h5>
               </div>
@@ -53,9 +53,9 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">New Clients</p>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Stock Bajo</p>
                 <h5 class="font-weight-bolder mb-0">
-                  +3,462
+                {{ $reportes['stocksBajo'] }}
                   <span class="text-danger text-sm font-weight-bolder">-2%</span>
                 </h5>
               </div>
@@ -75,9 +75,9 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Ventas</p>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Ventas Hoy</p>
                 <h5 class="font-weight-bolder mb-0">
-                  ${{ $totalVentas }}
+                  {{ $reportes['cantidadVentas'] }}
                   <span class="text-success text-sm font-weight-bolder">+5%</span>
                 </h5>
               </div>
