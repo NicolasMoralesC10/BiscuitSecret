@@ -9,7 +9,7 @@ use App\Http\Controllers\SessionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\UserController;use App\Http\Controllers\ProductoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,8 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('tables', function () {
 		return view('tables');
 	})->name('tables');
-
-	Route::get('virtual-reality', function () {
+	Route::resource('users', UserController::class);
+    Route::get('virtual-reality', function () {
 		return view('virtual-reality');
 	})->name('virtual-reality');
 
