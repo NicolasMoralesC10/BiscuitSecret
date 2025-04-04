@@ -32,7 +32,7 @@
       <li class="nav-item mt-2">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Administración</h6>
       </li>
-           <li class="nav-item pb-2">
+      <li class="nav-item pb-2">
         <a class="nav-link {{ (Route::currentRouteName() == 'users.index' || 
                 Route::currentRouteName() == 'users.create' || 
                 Route::currentRouteName() == 'users.edit' || 
@@ -59,7 +59,7 @@
                 Route::currentRouteName() == 'productos.edit' ? 'active' : '') }}
 " href="{{ url('productos') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i style="font-size: 1rem;" class="fa-solid fa-boxes-stacked ps-2 pe-2 text-center text-dark {{ (Route::currentRouteName() == 'users.index' || 
+            <i style="font-size: 1rem;" class="fa-solid fa-boxes-stacked ps-2 pe-2 text-center text-dark {{ (
                 Route::currentRouteName() == 'productos.create' || 
                 Route::currentRouteName() == 'productos.edit' || 
                 Route::currentRouteName() == 'productos.index' ? 'text-white' : 'text-dark') }} 
