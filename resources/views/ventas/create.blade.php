@@ -562,6 +562,8 @@
 
             var filas = $("#tabla-productos tbody tr").length;
             if (filas === 0) {
+                $("#product").val('');
+                $("#product").focus();
                 Swal.fire({
                     icon: 'warning',
                     title: '¡Sin productos!',

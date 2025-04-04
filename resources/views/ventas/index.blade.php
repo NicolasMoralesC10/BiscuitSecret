@@ -47,7 +47,7 @@
                         </tr>
                      </thead>
                      <tbody>
-                        @foreach ($ventas as $venta)
+                        @forelse ($ventas as $venta)
                         <tr>
                            <td class="text-center">
                               <p class="text-sm font-weight-bold mb-0">
@@ -98,7 +98,13 @@
 
                            </td>
                         </tr>
-                        @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="4" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder">
+                                No hay ventas registradas.
+                            </td>
+                        </tr>
+                        @endforelse
 
 
                         <!-- <tr>
