@@ -58,6 +58,7 @@
   height: 45px;
   border-radius: 50%;
   background-color: rgb(20, 20, 20);
+
   border: none;
   font-weight: 600;
   align-items: center;
@@ -96,7 +97,7 @@
 .buttonDel::before {
   position: absolute;
   top: -20px;
-  content: "Delete";
+  content: "Eliminar";
   color: white;
   transition-duration: .3s;
   font-size: 2px;

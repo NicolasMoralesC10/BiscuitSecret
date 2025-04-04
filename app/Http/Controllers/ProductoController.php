@@ -12,7 +12,7 @@ class ProductoController extends Controller
 
         $productos = Productos::orderByRaw('estado = 1 DESC') 
             ->orderBy('nombre', 'asc') 
-            ->paginate(1); 
+            ->paginate(6); 
 
         return view('productos.index', compact('productos'));
     }
