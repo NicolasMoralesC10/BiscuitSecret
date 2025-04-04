@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VentaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,7 +29,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('dashboard', function () {
 		return view('dashboard');
 	})->name('dashboard');
+	Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
 
+	Route::resource('ventas', VentaController::class);
+	Route::post('/obtener-stock', [VentaController::class, 'obtenerStock']);
 	Route::get('billing', function () {
 		return view('billing');
 	})->name('billing');
@@ -62,6 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('sign-up');
 
     Route::get('/logout', [SessionsController::class, 'destroy']);
+	Route::get('/pdf', [VentaController::class, 'pdf']);
 	Route::get('/user-profile', [InfoUserController::class, 'create']);
 	Route::post('/user-profile', [InfoUserController::class, 'store']);
     Route::get('/login', function () {

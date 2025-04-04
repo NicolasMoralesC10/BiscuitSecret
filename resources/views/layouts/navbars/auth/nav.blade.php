@@ -14,8 +14,15 @@
                 @else
                     <li class="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">Listar Usuarios</li>
                 @endif
-            @else 
-                <li class="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">{{ str_replace('-', ' ', Request::path()) }}</li>
+            @elseif (str_contains(Request::path(), 'ventas'))
+                @if (str_contains(Request::path(), 'create'))
+                    <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Nueva Venta</h6>
+                @else
+                    <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Listar Ventas</h6>
+                @endif
+
+            @else
+                <h6 class="font-weight-bolder mb-0 text-capitalize">{{ str_replace('-', ' ', Request::path()) }}</h6>
             @endif
             </ol>
             @if (str_contains(Request::path(), 'users'))
@@ -26,6 +33,13 @@
                 @else
                     <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Listar Usuarios</h6>
                 @endif
+            @elseif (str_contains(Request::path(), 'ventas'))
+                @if (str_contains(Request::path(), 'create'))
+                    <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Nueva Venta</h6>
+                @else
+                    <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Listar Ventas</h6>
+                @endif
+
             @else
                 <h6 class="font-weight-bolder mb-0 text-capitalize">{{ str_replace('-', ' ', Request::path()) }}</h6>
             @endif
