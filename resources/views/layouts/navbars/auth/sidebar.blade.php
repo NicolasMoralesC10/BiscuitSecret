@@ -38,7 +38,7 @@
                 Route::currentRouteName() == 'users.edit' || 
                 Route::currentRouteName() == 'users.show' ? 'active' : '') }}" href="{{ url('users') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Route::currentRouteName() == 'users.index' || 
+            <i style="font-size: 1rem;" class="fas fa-lg fa-users ps-2 pe-2 text-center text-dark {{ (Route::currentRouteName() == 'users.index' || 
                 Route::currentRouteName() == 'users.create' || 
                 Route::currentRouteName() == 'users.edit' || 
                 Route::currentRouteName() == 'users.show' ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
