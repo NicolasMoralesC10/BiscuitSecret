@@ -8,13 +8,25 @@
         <div class="card-body p-3">
           <div class="row">
             <div class="col-8">
-              <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Ventas</p>
+
+            <div class="numbers">
+          <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Ventas</p>
+          <h5 class="font-weight-bolder mb-0">
+            $<span id="totalVentas"></span>
+            <span id="porcentajeCambio" class="text-success text-sm font-weight-bolder">+0%</span>
+          </h5>
+        </div>
+        <div class="progress">
+          <div id="barraProgreso" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+              <!-- <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bolder">Ganancias</p>
                 <h5 class="font-weight-bolder mb-0">
-                ${{ $reportes['totalVentas'] }}
+                  ${{ $reportes['totalVentas'] }}
                   <span class="text-success text-sm font-weight-bolder">+55%</span>
                 </h5>
-              </div>
+              </div> -->
             </div>
             <div class="col-4 text-end">
               <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
@@ -40,7 +52,7 @@
             </div>
             <div class="col-4 text-end">
               <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                <i class="ni ni-credit-card text-lg opacity-10" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -62,7 +74,7 @@
             </div>
             <div class="col-4 text-end">
               <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                <i class="ni ni-alert text-lg opacity-10" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -92,20 +104,23 @@
       </div>
     </div>
   </div>
+
   <div class="row mt-4">
-    <!-- <div class="col-lg-7 mb-lg-0 mb-4">
+    <div class="col-lg-7 mb-lg-0 mb-4">
       <div class="card">
         <div class="card-body p-3">
           <div class="row">
             <div class="col-lg-6">
               <div class="d-flex flex-column h-100">
-                <p class="mb-1 pt-2 text-bold">Built by developers</p>
-                <h5 class="font-weight-bolder">Soft UI Dashboard</h5>
-                <p class="mb-5">From colors, cards, typography to complex elements, you will find the full documentation.</p>
-                <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
+                <p class="mb-1 pt-2 text-bold">Dashboard</p>
+                <h5 class="font-weight-bolder">Biscuit Secret</h5>
+                <em class="mb-5">
+                  Este sistema diseñado para optimizar el manejo de tu inventario ofrece funcionalidades clave para controlar el stock, gestionar y realizar seguimiento de ventas y automatizar procesos administrativos.
+                </em>
+                <!-- <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
                   Read More
                   <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-                </a>
+                </a> -->
               </div>
             </div>
             <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
@@ -134,10 +149,11 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
+
   <div class="row mt-4">
-    <!-- <div class="col-lg-5 mb-lg-0 mb-4">
+    <div class="col-lg-5 mb-lg-0 mb-4">
       <div class="card z-index-2">
         <div class="card-body p-3">
           <div class="bg-gradient-dark border-radius-lg py-3 pe-1 mb-3">
@@ -252,15 +268,15 @@
           </div>
         </div>
       </div>
-    </div> -->
-    <!-- <div class="col-lg-7">
+    </div>
+    <div class="col-lg-7">
       <div class="card z-index-2">
         <div class="card-header pb-0">
-          <h6>Sales overview</h6>
-          <p class="text-sm">
+          <h4>Ventas por Hora</h4>
+          <!-- <p class="text-sm">
             <i class="fa fa-arrow-up text-success"></i>
             <span class="font-weight-bold">4% more</span> in 2021
-          </p>
+          </p> -->
         </div>
         <div class="card-body p-3">
           <div class="chart">
@@ -268,7 +284,7 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 
   <!-- <div class="row my-4">
@@ -619,7 +635,35 @@
 
 @endsection
 @push('dashboard')
-  <script>
+<!-- Cards -->
+<script>
+  // Variables de ventas
+  let totalVentasActual = 1500;
+  let totalVentasAnterior = 1000;
+
+  // Calcular el porcentaje de cambio
+  let porcentajeCambio = ((totalVentasActual - totalVentasAnterior) / totalVentasAnterior) * 100;
+  
+  // Actualizar el total de ventas y el porcentaje
+  document.getElementById('totalVentas').textContent = totalVentasActual;
+  document.getElementById('porcentajeCambio').textContent = porcentajeCambio >= 0 ? `+${porcentajeCambio.toFixed(2)}%` : `-${porcentajeCambio.toFixed(2)}%`;
+  
+  // Cambiar el color del porcentaje
+  if (porcentajeCambio >= 0) {
+    document.getElementById('porcentajeCambio').classList.remove('text-danger');
+    document.getElementById('porcentajeCambio').classList.add('text-success');
+  } else {
+    document.getElementById('porcentajeCambio').classList.remove('text-success');
+    document.getElementById('porcentajeCambio').classList.add('text-danger');
+  }
+
+  // Actualizar la barra de progreso
+  document.getElementById('barraProgreso').style.width = `${porcentajeCambio}%`;
+  document.getElementById('barraProgreso').setAttribute('aria-valuenow', porcentajeCambio);
+</script>
+
+<!-- Script plantilla -->
+  <!-- <script>
     window.onload = function() {
       var ctx = document.getElementById("chart-bars").getContext("2d");
 
@@ -790,6 +834,475 @@
         },
       });
     }
-  </script>
+  </script> -->
+
+<!-- Script ejemplo -->
+<!-- <script>
+  window.onload = function() {
+    var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
+
+    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
+
+    new Chart(ctx2, {
+      type: "line",
+      data: {
+        labels: Array.from({ length: 24 }, (_, i) => `${i}:00`), // Genera las horas del día (00:00, 01:00,..., 23:00)
+        datasets: [
+          {
+            label: "Productos Vendidos (Tipo A)",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#cb0c9f",  // Color de la línea
+            borderWidth: 3,
+            backgroundColor: gradientStroke1,  // Fondo gradiente para la línea
+            fill: true,
+            data: [5, 10, 12, 14, 18, 24, 30, 32, 35, 40], // Productos vendidos por hora (Tipo A)
+            maxBarThickness: 6
+          },
+          {
+            label: "Productos Vendidos (Tipo B)",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#3A416F",  // Otro color para la segunda línea
+            borderWidth: 3,
+            backgroundColor: gradientStroke2,  // Fondo gradiente para la línea
+            fill: true,
+            data: [4, 8, 11, 13, 17, 22, 28, 31, 34, 39], // Productos vendidos por hora (Tipo B)
+            maxBarThickness: 6
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true  // Asegúrate de que la leyenda esté visible para diferenciar los tipos de productos
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index'
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              padding: 10,
+              color: '#b2b9bf',
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              }
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              color: '#b2b9bf',
+              padding: 20,
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              }
+            }
+          }
+        }
+      }
+    });
+  };
+</script> -->
+
+<!-- <script>
+  window.onload = function() {
+    // Hacemos la petición al backend para obtener los datos
+    fetch('{{ url("/ventas/por-hora") }}')
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+
+        // Aquí extraemos los datos del formato que nos llegó
+        const horas = [];
+        const galletaChocolate = [];
+        const galletaVainilla = [];
+
+        // Procesamos los datos
+        data.forEach((item) => {
+          item.forEach((producto) => {  
+            horas.push(producto.hora);
+            if (producto.nombre === 'Galleta de chocolate') {
+              galletaChocolate.push(producto.cantidad_vendida);
+            } else if (producto.nombre === 'Galleta de vainilla') {
+              galletaVainilla.push(producto.cantidad_vendida);
+            }
+          });
+        });
+
+        // Ahora pasamos estos datos al gráfico
+        var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+        var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+        gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+        gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
+
+        var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+        gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+        gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
+
+        new Chart(ctx2, {
+          type: "line",
+          data: {
+            labels: horas,  // Usamos las horas obtenidas
+            datasets: [
+              {
+                label: "Galleta de Chocolate",
+                tension: 0.4,
+                borderWidth: 0,
+                pointRadius: 0,
+                borderColor: "#cb0c9f",
+                borderWidth: 3,
+                backgroundColor: gradientStroke1,
+                fill: true,
+                data: galletaChocolate, // Datos de Galleta de Chocolate
+                maxBarThickness: 6
+              },
+              {
+                label: "Galleta de Vainilla",
+                tension: 0.4,
+                borderWidth: 0,
+                pointRadius: 0,
+                borderColor: "#3A416F",
+                borderWidth: 3,
+                backgroundColor: gradientStroke2,
+                fill: true,
+                data: galletaVainilla, // Datos de Galleta de Vainilla
+                maxBarThickness: 6
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: true
+              }
+            },
+            interaction: {
+              intersect: false,
+              mode: 'index'
+            },
+            scales: {
+              y: {
+                grid: {
+                  drawBorder: false,
+                  display: true,
+                  drawOnChartArea: true,
+                  drawTicks: false,
+                  borderDash: [5, 5]
+                },
+                ticks: {
+                  min: 0,
+                  max: 120,
+                  stepSize: 5
+                }
+              },
+              x: {
+                grid: {
+                  drawBorder: false,
+                  display: false,
+                  drawOnChartArea: false,
+                  drawTicks: false
+                },
+                ticks: {
+                  display: true
+                }
+              }
+            }
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Error al obtener los datos:', error);
+      });
+  }
+</script> -->
+
+<!-- <script>
+  window.onload = function() {
+    // Hacemos la petición al backend para obtener los datos
+    fetch('{{ url("/ventas/por-hora") }}')
+      .then(response => response.json())
+      .then(data => {
+        // Aquí extraemos los datos del formato que nos llegó
+        const horas = [];
+        const galletaChocolate = [];
+        const galletaVainilla = [];
+
+        // Procesamos los datos
+        data.forEach((item) => {
+          horas.push(item.hora);  // Añadimos la hora
+
+          if (item.nombre === 'Galleta de chocolate') {
+            galletaChocolate.push(item.cantidad_vendida);  // Añadimos la cantidad vendida de Galleta de chocolate
+          } else if (item.nombre === 'Galleta de vainilla') {
+            galletaVainilla.push(item.cantidad_vendida);  // Añadimos la cantidad vendida de Galleta de vainilla
+          }
+        });
+
+        // Ahora pasamos estos datos al gráfico
+        var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+        var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+        gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+        gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
+
+        var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+        gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+        gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
+
+        new Chart(ctx2, {
+          type: "line",
+          data: {
+            labels: horas,  // Usamos las horas obtenidas
+            datasets: [
+              {
+                label: "Galleta de Chocolate",
+                tension: 0.4,
+                borderWidth: 0,
+                pointRadius: 0,
+                borderColor: "#cb0c9f",
+                borderWidth: 3,
+                backgroundColor: gradientStroke1,
+                fill: true,
+                data: galletaChocolate, // Datos de Galleta de Chocolate
+                maxBarThickness: 6
+              },
+              {
+                label: "Galleta de Vainilla",
+                tension: 0.4,
+                borderWidth: 0,
+                pointRadius: 0,
+                borderColor: "#3A416F",
+                borderWidth: 3,
+                backgroundColor: gradientStroke2,
+                fill: true,
+                data: galletaVainilla, // Datos de Galleta de Vainilla
+                maxBarThickness: 6
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: true
+              }
+            },
+            interaction: {
+              intersect: false,
+              mode: 'index'
+            },
+            scales: {
+              y: {
+                grid: {
+                  drawBorder: false,
+                  display: true,
+                  drawOnChartArea: true,
+                  drawTicks: false,
+                  borderDash: [5, 5]
+                },
+                ticks: {
+                  min: 0,
+                  max: 120,
+                  stepSize: 5
+                }
+              },
+              x: {
+                grid: {
+                  drawBorder: false,
+                  display: false,
+                  drawOnChartArea: false,
+                  drawTicks: false
+                },
+                ticks: {
+                  display: true
+                }
+              }
+            }
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Error al obtener los datos:', error);
+      });
+  }
+</script> -->
+
+<script>
+  window.onload = function() {
+  // Hacemos la petición al backend para obtener los datos
+  fetch('{{ url("/ventas/por-hora") }}')
+    .then(response => response.json())
+    .then(data => {
+      // Aquí extraemos los datos del formato que nos llegó
+      const horas = [];
+      const galletaChocolate = [];
+      const galletaVainilla = [];
+
+      // Creamos un objeto para almacenar las ventas por hora y producto
+      const ventasPorHora = {};
+
+      // Procesamos los datos
+      data.forEach((item) => {
+        // Si no existe la hora, la inicializamos en el objeto
+        if (!ventasPorHora[item.hora]) {
+          ventasPorHora[item.hora] = {
+            'Galleta de chocolate': 0,
+            'Galleta de vainilla': 0
+          };
+        }
+
+        // Acumulamos las ventas por hora y producto
+        if (item.nombre === 'Galleta de chocolate') {
+          ventasPorHora[item.hora]['Galleta de chocolate'] += item.cantidad_vendida;
+        } else if (item.nombre === 'Galleta de vainilla') {
+          ventasPorHora[item.hora]['Galleta de vainilla'] += item.cantidad_vendida;
+        }
+      });
+
+      // Ahora pasamos los datos del objeto al formato adecuado para el gráfico
+      for (let hora in ventasPorHora) {
+        horas.push(hora);
+        galletaChocolate.push(ventasPorHora[hora]['Galleta de chocolate']);
+        galletaVainilla.push(ventasPorHora[hora]['Galleta de vainilla']);
+      }
+
+      // Ahora pasamos estos datos al gráfico
+      var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+      var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+      gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+      gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+      gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
+
+      var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+      gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+      gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+      gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
+
+      new Chart(ctx2, {
+        type: "line",
+        data: {
+          labels: horas,  // Usamos las horas obtenidas
+          datasets: [
+            {
+              label: "Galleta de Chocolate",
+              tension: 0.4,
+              borderWidth: 0,
+              pointRadius: 0,
+              borderColor: "#cb0c9f",
+              borderWidth: 3,
+              backgroundColor: gradientStroke1,
+              fill: true,
+              data: galletaChocolate, // Datos de Galleta de Chocolate
+              maxBarThickness: 6
+            },
+            {
+              label: "Galleta de Vainilla",
+              tension: 0.4,
+              borderWidth: 0,
+              pointRadius: 0,
+              borderColor: "#3A416F",
+              borderWidth: 3,
+              backgroundColor: gradientStroke2,
+              fill: true,
+              data: galletaVainilla, // Datos de Galleta de Vainilla
+              maxBarThickness: 6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true
+            }
+          },
+          interaction: {
+            intersect: false,
+            mode: 'index'
+          },
+          scales: {
+            y: {
+              grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5]
+              },
+              ticks: {
+                min: 0,
+                max: 120,
+                stepSize: 5
+              }
+            },
+            x: {
+              grid: {
+                drawBorder: false,
+                display: false,
+                drawOnChartArea: false,
+                drawTicks: false
+              },
+              ticks: {
+                display: true
+              }
+            }
+          }
+        }
+      });
+    })
+    .catch(error => {
+      console.error('Error al obtener los datos:', error);
+    });
+}
+
+</script>
+
 @endpush
 
