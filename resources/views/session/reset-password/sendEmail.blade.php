@@ -26,23 +26,23 @@
                         </div>
                     @endif
                     <div class="card-header pb-0 text-left bg-transparent">
-                        <h4 class="mb-0">Forgot your password? Enter your email here</h4>
+                        <h4 class="mb-0">Olvidaste tu contraseña? Ingresa aquí tu correo</h4>
                     </div>
                     <div class="card-body">
                     
                         <form action="/forgot-password" method="POST" role="form text-left">
                             @csrf
                             <div>
-                                <label for="email">Email</label>
+                                <label for="email">Correo</label>
                                 <div class="">
-                                    <input id="email" name="email" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
+                                    <input id="email" name="email" type="email" class="form-control" placeholder="Correo" aria-label="Email" aria-describedby="email-addon">
                                     @error('email')
                                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Recover your password</button>
+                                <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Recuperar contraseña</button>
                             </div>
                         </form>
                     </div>

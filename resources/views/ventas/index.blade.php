@@ -140,7 +140,10 @@
                   <div class="pagination-container">
                       {{ $ventas->links('pagination::bootstrap-4') }}
                   </div>
+
+                  
                </div>
+               <a type="button" class="btn bg-gradient-primary btn-sm ms-3 mb-0" href="{{ url('/pdf') }}" target="_blank">Generar Reporte</a>
             </div>
          </div>
       </div>

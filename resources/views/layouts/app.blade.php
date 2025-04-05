@@ -89,9 +89,11 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-    let parrafo = document.querySelector('#parrafo');
-    setTimeout(() =>
-      parrafo.remove(), 2000);
+    if (document.querySelector('#parrafo')){
+      let parrafo = document.querySelector('#parrafo');
+      setTimeout(() => 
+      parrafo.remove() , 2000);
+    }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

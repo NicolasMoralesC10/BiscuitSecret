@@ -28,11 +28,13 @@ use App\Http\Controllers\VentaController;
 Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/', [HomeController::class, 'home']);
+	Route::get('dashboard', function () {
+		return view('dashboard');
+	})->name('dashboard');
 	Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
 
 	Route::resource('ventas', VentaController::class);
 	Route::post('/obtener-stock', [VentaController::class, 'obtenerStock']);
-
 	Route::get('billing', function () {
 		return view('billing');
 	})->name('billing');
@@ -73,6 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('sign-up');
 
 	Route::get('/logout', [SessionsController::class, 'destroy']);
+	Route::get('/pdf', [VentaController::class, 'pdf']);
 	Route::get('/user-profile', [InfoUserController::class, 'create']);
 	Route::post('/user-profile', [InfoUserController::class, 'store']);
 	Route::get('/login', function () {
@@ -87,6 +90,10 @@ Route::group(['middleware' => 'guest'], function () {
 	Route::post('/register', [RegisterController::class, 'store']);
 	Route::get('/login', [SessionsController::class, 'create']);
 	Route::post('/session', [SessionsController::class, 'store']);
+	Route::get('/login/forgot-password', [ResetController::class, 'create']);
+	Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
+	Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
+	Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
 });
 
 Route::get('/login', function () {

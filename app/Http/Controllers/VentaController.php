@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Producto;
 use App\Models\Venta;
-
+use Codedge\Fpdf\Fpdf\Fpdf;
 class VentaController extends Controller
 {
     public function index(Request $request)
@@ -35,7 +35,58 @@ class VentaController extends Controller
             'stock' => $producto->cantidad,
         ]);
     }
+    public function pdf(Fpdf $fpdf): RedirectResponse
+    {
 
+        $fpdf->AddPage("landscape");
+        $fpdf->AliasNbPages();
+        $fpdf->SetFont('Arial', '', 12);
+        $fpdf->SetDrawColor(163, 163, 163);
+        $fpdf->Cell(95);
+        $fpdf->SetTextColor(0, 0, 0);
+        $fpdf->Cell(92, 15, utf8_decode('BISCUIT SECRET'), 0, 1, 'C', 0);
+        $fpdf->Ln(3);
+
+        /* TÍTULO DE LA TABLA */
+        $fpdf->SetTextColor(161, 130, 98);
+        $fpdf->Cell(100);
+        $fpdf->SetFont('Arial', 'B', 15);
+        $fpdf->Cell(82, 10, utf8_decode("PRODUCTOS MÁS VENDIDOS"), 0, 1, 'C', 0);
+        $fpdf->Ln(7);
+
+        /* CAMPOS DE LA TABLA */
+        $fpdf->Cell(40);
+        $fpdf->SetFillColor(161, 130, 98);
+        $fpdf->SetTextColor(255, 255, 255);
+        $fpdf->SetDrawColor(163, 163, 163);
+        $fpdf->SetFont('Arial', 'B', 11);
+        $fpdf->Cell(120, 10, utf8_decode('NOMBRE DEL PRODUCTO'), 1, 0, 'C', 1);
+        $fpdf->Cell(80, 10, utf8_decode('CANTIDAD DE VENTAS'), 1, 1, 'C', 1);
+        $productos = Producto::all();
+        $ventas = Venta::with('productos')->all();
+        if (!empty($productos)) {
+            foreach ($productos as $producto) {
+                
+
+                // Crear filas de la tabla con los datos de la consulta
+                $fpdf->Cell(40); // Mover a la derecha
+                $fpdf->SetTextColor(0, 0, 0);
+                $fpdf->Cell(120, 10, utf8_decode($producto['nombre']), 1, 0, 'C', 0);
+                $fpdf->SetTextColor(0, 0, 0);
+                $fpdf->Cell(80, 10, utf8_decode($producto['cantidad']), 1, 1, 'C', 0);
+
+            }
+        } else {
+            $fpdf->Cell(40);
+            $fpdf->SetTextColor(0, 0, 0);
+            $fpdf->Cell(200, 10, 'No se encontraron datos.', 1, 1, 'C');
+        }
+
+
+        $nombreArchivo = 'Reporte - Productos mas Vendidos/' . date('Y-m-d_H-i-s') . '.pdf';
+        $fpdf->Output($nombreArchivo, 'I');
+        exit;
+    }
     public function create()
     {
         $productos = Producto::all();

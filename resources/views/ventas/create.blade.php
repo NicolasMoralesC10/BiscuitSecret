@@ -341,7 +341,6 @@
             var id_pro = $(this).closest('tr').find("input[name='producto_id[]']").val();
             validarStockMax(this, id_pro);
         });
-
         $(document).on('blur', 'input[name="cantidad[]"]', function() {
             var id_pro = $(this).closest('tr').find("input[name='producto_id[]']").val();
             validarCantidadCero(this);
@@ -388,7 +387,6 @@
                 }
             });
         }
-
         function validarCantidadCero(campo) {
             var cantidad = $(campo).val();
 

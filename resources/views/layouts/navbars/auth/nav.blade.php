@@ -2,22 +2,71 @@
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl position-sticky blur shadow-blur mt-4 left-auto top-1 z-index-sticky" id="navbarBlur" navbar-scroll="true">
     <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
+            @php
+            $path = Request::path();
+            $breadcrumbs = [];
+
+            // Productos
+            if (str_contains($path, 'productos')) {
+            $breadcrumbs[] = ['label' => 'Productos', 'url' => url('productos')];
+
+            if (str_contains($path, 'create')) {
+            $breadcrumbs[] = ['label' => 'Nuevo producto'];
+            } elseif (str_contains($path, 'edit')) {
+            $breadcrumbs[] = ['label' => 'Editar producto'];
+            } else {
+            $breadcrumbs[] = ['label' => 'Listar productos'];
+            }
+            }
+            // Usuarios
+            elseif (str_contains($path, 'users')) {
+            $breadcrumbs[] = ['label' => 'Usuarios', 'url' => url('users')];
+
+            if (str_contains($path, 'create')) {
+            $breadcrumbs[] = ['label' => 'Nuevo Usuario'];
+            } elseif (str_contains($path, 'edit')) {
+            $breadcrumbs[] = ['label' => 'Editar Usuario'];
+            } else {
+            $breadcrumbs[] = ['label' => 'Listar Usuarios'];
+            }
+            }
+            // Ventas
+            elseif (str_contains($path, 'ventas')) {
+            if (str_contains($path, 'create')) {
+            $breadcrumbs[] = ['label' => 'Nueva Venta'];
+            } else {
+            $breadcrumbs[] = ['label' => 'Listar Ventas'];
+            }
+            }
+            // Otros: se muestra el path modificado
+            else {
+            $breadcrumbs[] = ['label' => ucwords(str_replace('-', ' ', $path))];
+            }
+            @endphp
+
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                @if (str_contains(Request::path(), 'productos'))
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ url('productos')}}">Productos</a></li>
-                @endif
-                @if (str_contains(Request::path(), 'productos'))
-                @if (str_contains(Request::path(), 'create'))
-                <li class="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">Nuevo producto</li>
-                @elseif (str_contains(Request::path(), 'edit'))
-                <li class="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">Editar producto</li>
+                @foreach ($breadcrumbs as $breadcrumb)
+                @if (isset($breadcrumb['url']))
+                <li class="breadcrumb-item text-sm">
+                    <a class="opacity-5 text-dark" href="{{ $breadcrumb['url'] }}">
+                        {{ $breadcrumb['label'] }}
+                    </a>
+                </li>
                 @else
-                <li class="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">Listar productos</li>
-                @endif
+                {{-- En el caso de "ventas" se usa <h6> en lugar de <li> según la lógica original --}}
+                @if (str_contains($path, 'ventas'))
+                <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">
+                    {{ $breadcrumb['label'] }}
+                </h6>
                 @else
-                <li class="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">{{ str_replace('-', ' ', Request::path()) }}</li>
+                <li class="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">
+                    {{ $breadcrumb['label'] }}
+                </li>
                 @endif
+                @endif
+                @endforeach
             </ol>
+
             @if (str_contains(Request::path(), 'productos'))
             @if (str_contains(Request::path(), 'create'))
             <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Nuevo producto</h6>
