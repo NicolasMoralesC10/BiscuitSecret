@@ -154,11 +154,27 @@
 
   <div class="row mt-4">
     <div class="col-lg-5 mb-lg-0 mb-4">
+
       <div class="card z-index-2">
+        <div class="card-header pb-0">
+          <h4>Ventas por Hora</h4>
+          <!-- <p class="text-sm">
+            <i class="fa fa-arrow-up text-success"></i>
+            <span class="font-weight-bold">4% more</span> in 2021
+          </p> -->
+        </div>
+        <div class="card-body p-3">
+          <div class="chart">
+            <canvas id="chart-pie" class="chart-canvas" style="max-height: 300px;"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="card z-index-2">
         <div class="card-body p-3">
           <div class="bg-gradient-dark border-radius-lg py-3 pe-1 mb-3">
             <div class="chart">
-              <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
+              <canvas id="chart-pie" class="chart-canvas" height="170"></canvas>
             </div>
           </div>
           <h6 class="ms-2 mt-4 mb-0"> Active Users </h6>
@@ -267,8 +283,9 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
+    
     <div class="col-lg-7">
       <div class="card z-index-2">
         <div class="card-header pb-0">
@@ -1172,135 +1189,239 @@
   }
 </script> -->
 
-<script>
-  window.onload = function() {
-  // Hacemos la petición al backend para obtener los datos
-  fetch('{{ url("/ventas/por-hora") }}')
-    .then(response => response.json())
-    .then(data => {
-      // Aquí extraemos los datos del formato que nos llegó
-      const horas = [];
-      const galletaChocolate = [];
-      const galletaVainilla = [];
+<!-- Gracifa circular -->
+<!-- <script>
+  var ctx = document.getElementById("chart-pie").getContext("2d");
+  
+  // Crear los gradientes para cada producto con gradientes radiales
+ /*  var gradientStroke1 = ctx.createRadialGradient(0.5, 0.5, 0.3, 0.5, 0.5, 1);
+  gradientStroke1.addColorStop(0, 'rgba(203,12,159,0.7)');  // Color en el centro
+  gradientStroke1.addColorStop(1, 'rgba(240, 96, 204, 0.2)');  // Color en el borde exterior
+              
+  var gradientStroke2 = ctx.createRadialGradient(0.5, 0.5, 0.3, 0.5, 0.5, 1);
+  gradientStroke2.addColorStop(0, 'rgba(0, 38, 255, 0.7)'); // Color en el centro
+  gradientStroke2.addColorStop(1, 'rgba(0, 0, 255, 0.2)'); // Color en el borde exterior
+              
+  var gradientStroke3 = ctx.createRadialGradient(0.5, 0.5, 0.3, 0.5, 0.5, 1);
+  gradientStroke3.addColorStop(0, 'rgba(72,72,176,0.7)'); // Color en el centro
+  gradientStroke3.addColorStop(1, 'rgba(203,12,159,0.2)'); // Color en el borde exterior
+              
+  var gradientStroke4 = ctx.createRadialGradient(0.5, 0.5, 0.3, 0.5, 0.5, 1);
+  gradientStroke4.addColorStop(0, 'rgba(255,193,7,0.7)');  // Color en el centro
+  gradientStroke4.addColorStop(1, 'rgba(72,72,176,0.2)');  // Color en el borde exterior */
 
-      // Creamos un objeto para almacenar las ventas por hora y producto
-      const ventasPorHora = {};
-
-      // Procesamos los datos
-      data.forEach((item) => {
-        // Si no existe la hora, la inicializamos en el objeto
-        if (!ventasPorHora[item.hora]) {
-          ventasPorHora[item.hora] = {
-            'Galleta de chocolate': 0,
-            'Galleta de vainilla': 0
-          };
-        }
-
-        // Acumulamos las ventas por hora y producto
-        if (item.nombre === 'Galleta de chocolate') {
-          ventasPorHora[item.hora]['Galleta de chocolate'] += item.cantidad_vendida;
-        } else if (item.nombre === 'Galleta de vainilla') {
-          ventasPorHora[item.hora]['Galleta de vainilla'] += item.cantidad_vendida;
-        }
-      });
-
-      // Ahora pasamos los datos del objeto al formato adecuado para el gráfico
-      for (let hora in ventasPorHora) {
-        horas.push(hora);
-        galletaChocolate.push(ventasPorHora[hora]['Galleta de chocolate']);
-        galletaVainilla.push(ventasPorHora[hora]['Galleta de vainilla']);
-      }
-
-      // Ahora pasamos estos datos al gráfico
-      var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-      var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-      gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-      gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-      gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
-
-      var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-      gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-      gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-      gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
-
-      new Chart(ctx2, {
-        type: "line",
-        data: {
-          labels: horas,  // Usamos las horas obtenidas
-          datasets: [
-            {
-              label: "Galleta de Chocolate",
-              tension: 0.4,
-              borderWidth: 0,
-              pointRadius: 0,
-              borderColor: "#cb0c9f",
-              borderWidth: 3,
-              backgroundColor: gradientStroke1,
-              fill: true,
-              data: galletaChocolate, // Datos de Galleta de Chocolate
-              maxBarThickness: 6
-            },
-            {
-              label: "Galleta de Vainilla",
-              tension: 0.4,
-              borderWidth: 0,
-              pointRadius: 0,
-              borderColor: "#3A416F",
-              borderWidth: 3,
-              backgroundColor: gradientStroke2,
-              fill: true,
-              data: galletaVainilla, // Datos de Galleta de Vainilla
-              maxBarThickness: 6
-            }
-          ]
+  new Chart(ctx, {
+    type: "pie", // Cambiado de 'bar' a 'pie'
+    data: {
+      labels: ["Producto A", "Producto B", "Producto C", "Producto D"], // Etiquetas de los productos
+      datasets: [{
+        label: "Ventas Totales por Producto", // Título de la serie de datos
+        backgroundColor: [
+          "#d5006d", // Gradiente para el primer producto
+          "#ff4081", // Gradiente para el segundo producto
+          "#3d5afe", // Gradiente para el tercer producto
+          "#1a237e"  // Gradiente para el cuarto producto
+        ], // Colores del gráfico (puedes cambiar los colores)
+        data: [1200, 500, 800, 1500], // Datos de ventas por producto
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true, // Mostrar la leyenda
+          position: "top", // Posición de la leyenda
         },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: true
-            }
-          },
-          interaction: {
-            intersect: false,
-            mode: 'index'
-          },
-          scales: {
-            y: {
-              grid: {
-                drawBorder: false,
-                display: true,
-                drawOnChartArea: true,
-                drawTicks: false,
-                borderDash: [5, 5]
-              },
-              ticks: {
-                min: 0,
-                max: 120,
-                stepSize: 5
-              }
-            },
-            x: {
-              grid: {
-                drawBorder: false,
-                display: false,
-                drawOnChartArea: false,
-                drawTicks: false
-              },
-              ticks: {
-                display: true
-              }
+        tooltip: {
+          enabled: true, // Habilitar los tooltips al pasar el ratón sobre las secciones
+          callbacks: {
+            label: function(tooltipItem) {
+              return tooltipItem.label + ": " + tooltipItem.raw + " ventas"; // Personalizar el formato de la información al pasar el ratón
             }
           }
         }
+      },
+    },
+  });
+
+</script> -->
+
+<script>
+    // Realizar una solicitud fetch para obtener los datos de las ventas totales
+    fetch('{{ url("/ventas/totales") }}')
+      .then(response => response.json())  // Convertir la respuesta a JSON
+      .then(data => {
+        // Los datos recibidos son un arreglo con nombre de producto y ventas totales
+        const labels = data.map(item => item.nombre_producto);  // Extraer los nombres de productos
+        const salesData = data.map(item => item.ventas_totales);  // Extraer las ventas totales
+
+        // Crear el gráfico de pastel (pie chart)
+        var ctx = document.getElementById("chart-pie").getContext("2d");
+
+        new Chart(ctx, {
+          type: "pie",  // Tipo de gráfico (pie)
+          data: {
+            labels: labels,  // Nombres de productos como etiquetas
+            datasets: [{
+              label: "Ventas Totales por Producto",
+              data: salesData,  // Datos de ventas totales por producto
+              backgroundColor: ['#d5006d', '#ff4081', '#8e24aa', '#c2185b'],  // Colores de cada producto (puedes cambiarlos)
+            }]
+          },
+          options: {
+            responsive: true,  // Asegura que el gráfico sea responsivo
+            plugins: {
+              legend: {
+                position: 'top',  // Posición de la leyenda
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(tooltipItem) {
+                    // Personalizar el formato del tooltip
+                    return tooltipItem.label + ": " + tooltipItem.raw + " ventas";
+                  }
+                }
+              }
+            }
+          }
+        });
+      })
+      .catch(err => {
+        console.error('Error al obtener los datos:', err);  // Manejo de errores
       });
-    })
-    .catch(error => {
-      console.error('Error al obtener los datos:', error);
-    });
-}
+  </script>
+
+<!-- Grafica lineal -->
+<script>
+  window.onload = function() {
+    // Hacemos la petición al backend para obtener los datos
+    fetch('{{ url("/ventas/por-hora") }}')
+      .then(response => response.json())
+      .then(data => {
+        // Aquí extraemos los datos del formato que nos llegó
+        const horas = [];
+        const galletaChocolate = [];
+        const galletaVainilla = [];
+
+        // Creamos un objeto para almacenar las ventas por hora y producto
+        const ventasPorHora = {};
+
+        // Procesamos los datos
+        data.forEach((item) => {
+          // Si no existe la hora, la inicializamos en el objeto
+          if (!ventasPorHora[item.hora]) {
+            ventasPorHora[item.hora] = {
+              'Galleta de chocolate': 0,
+              'Galleta de vainilla': 0
+            };
+          }
+
+          // Acumulamos las ventas por hora y producto
+          if (item.nombre === 'Galleta de chocolate') {
+            ventasPorHora[item.hora]['Galleta de chocolate'] += item.cantidad_vendida;
+          } else if (item.nombre === 'Galleta de vainilla') {
+            ventasPorHora[item.hora]['Galleta de vainilla'] += item.cantidad_vendida;
+          }
+        });
+
+        // Ahora pasamos los datos del objeto al formato adecuado para el gráfico
+        for (let hora in ventasPorHora) {
+          horas.push(hora);
+          galletaChocolate.push(ventasPorHora[hora]['Galleta de chocolate']);
+          galletaVainilla.push(ventasPorHora[hora]['Galleta de vainilla']);
+        }
+
+        // Ahora pasamos estos datos al gráfico
+        var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+        var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+        gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+        gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)');
+
+        var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+        gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+        gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
+
+        new Chart(ctx2, {
+          type: "line",
+          data: {
+            labels: horas,  // Usamos las horas obtenidas
+            datasets: [
+              {
+                label: "Galleta de Chocolate",
+                tension: 0.4,
+                borderWidth: 0,
+                pointRadius: 0,
+                borderColor: "#cb0c9f",
+                borderWidth: 3,
+                backgroundColor: gradientStroke1,
+                fill: true,
+                data: galletaChocolate, // Datos de Galleta de Chocolate
+                maxBarThickness: 6
+              },
+              {
+                label: "Galleta de Vainilla",
+                tension: 0.4,
+                borderWidth: 0,
+                pointRadius: 0,
+                borderColor: "#3A416F",
+                borderWidth: 3,
+                backgroundColor: gradientStroke2,
+                fill: true,
+                data: galletaVainilla, // Datos de Galleta de Vainilla
+                maxBarThickness: 6
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: true
+              }
+            },
+            interaction: {
+              intersect: false,
+              mode: 'index'
+            },
+            scales: {
+              y: {
+                grid: {
+                  drawBorder: false,
+                  display: true,
+                  drawOnChartArea: true,
+                  drawTicks: false,
+                  borderDash: [5, 5]
+                },
+                ticks: {
+                  min: 0,
+                  max: 120,
+                  stepSize: 5
+                }
+              },
+              x: {
+                grid: {
+                  drawBorder: false,
+                  display: false,
+                  drawOnChartArea: false,
+                  drawTicks: false
+                },
+                ticks: {
+                  display: true
+                }
+              }
+            }
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Error al obtener los datos:', error);
+      });
+  }
 
 </script>
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
 use App\Models\Producto;
 use App\Models\Venta;
 
@@ -184,6 +183,51 @@ class HomeController extends Controller
 
         return response()->json($data);
     } */
+
+     // Función para obtener ventas totales por producto
+     /* Con Eloquent */
+     /* public function obtenerVentasTotales()
+     {
+         // Obtener los productos con la relación a la tabla pivote y calcular las ventas totales
+         $productos = Producto::with(['ventas' => function ($query) {
+             $query->selectRaw('sum(cantidad * subtotal) as total_ventas, productos_id_producto')
+                   ->groupBy('productos_id_producto');
+         }])->get();
+ 
+         // Procesar los datos para devolverlos en el formato adecuado
+         $data = [];
+         foreach ($productos as $producto) {
+             $totalVentas = $producto->ventas->sum('total_ventas');
+             $data[] = [
+                 'nombre_producto' => $producto->nombre,
+                 'ventas_totales' => $totalVentas
+             ];
+         }
+ 
+         return response()->json($data);
+     } */
+
+     /* Con Query Builder */
+     public function obtenerVentasTotales()
+    {
+        // Consulta utilizando DB para obtener el total de ventas por producto
+        $productos = DB::table('productos')
+            ->select('productos.nombre', DB::raw('SUM(ventas_has_productos.cantidad * ventas_has_productos.subtotal) as total_ventas'))
+            ->join('ventas_has_productos', 'productos.id', '=', 'ventas_has_productos.productos_id_producto')
+            ->groupBy('productos.id', 'productos.nombre')
+            ->get();
+
+        // Procesar los datos para devolverlos en el formato adecuado
+        $data = [];
+        foreach ($productos as $producto) {
+            $data[] = [
+                'nombre_producto' => $producto->nombre,
+                'ventas_totales' => $producto->total_ventas
+            ];
+        }
+
+        return response()->json($data);
+    }
 
     public function obtenerVentas()
     {
