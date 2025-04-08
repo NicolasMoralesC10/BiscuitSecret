@@ -28,8 +28,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [HomeController::class, 'home']);
 	Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
-	Route::get('/ventas/por-hora', [HomeController::class, 'obtenerVentas']);
 	Route::get('/ventas/totales', [HomeController::class, 'obtenerVentasTotales']);
+	Route::get('/ventas/por-hora', [HomeController::class, 'obtenerVentasPorHora']);
 
 	Route::resource('ventas', VentaController::class);
 	Route::post('/obtener-stock', [VentaController::class, 'obtenerStock']);

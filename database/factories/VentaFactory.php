@@ -22,7 +22,7 @@ class VentaFactory extends Factory
     public function definition(): array
     {
         return [
-            'total' => $this->faker->numberBetween(1000, 5000),
+            'total' => $this->faker->numberBetween(4000, 10000),
             'metodo_pago' => $this->faker->randomElement(['tarjeta', 'efectivo']),
             'estado' => 1,
         ];

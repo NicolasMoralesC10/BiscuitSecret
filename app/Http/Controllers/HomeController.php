@@ -229,7 +229,7 @@ class HomeController extends Controller
         return response()->json($data);
     }
 
-    public function obtenerVentas()
+    public function obtenerVentasPorHora()
     {
         // Definir las horas predeterminadas (de 8:00 AM a 6:00 PM)
         $horasPredeterminadas = [
@@ -257,8 +257,10 @@ class HomeController extends Controller
         foreach ($horasPredeterminadas as $hora) {
             // Inicializar los productos para cada hora
             $ventasAgrupadas[$hora] = [
-                'Galleta de chocolate' => 0,
-                'Galleta de vainilla' => 0,
+                'Galleta de Chocolate' => 0,
+                'Galleta de Oreo' => 0,
+                'Galleta de Snickers y Masmelos' => 0,
+                'Galleta de Avena con Fresas' => 0,
             ];
         }
     
