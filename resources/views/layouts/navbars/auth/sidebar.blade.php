@@ -54,12 +54,12 @@
           <span class="nav-link-text ms-1">Ventas</span>
         </a>
       </li>
-      <a class="nav-link {{ (Request::is('user-management') ? 'active' : '') }}" href="{{ url('user-management') }}">
+     <!--  <a class="nav-link {{ (Request::is('user-management') ? 'active' : '') }}" href="{{ url('user-management') }}">
         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
           <i style="font-size: 1rem;" class="fas fa-lg fa-list-ul ps-2 pe-2 text-center text-dark {{ (Request::is('user-management') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
         </div>
         <span class="nav-link-text ms-1">User Management</span>
-      </a>
+      </a> -->
       </li>
       <li class="nav-item pb-2">
         <a class="nav-link {{ (Route::currentRouteName() == 'productos.index' || 
@@ -76,10 +76,10 @@
           <span class="nav-link-text ms-1">Productos</span>
         </a>
       </li>
-      <li class="nav-item mt-2">
+     <!--  <li class="nav-item mt-2">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Example pages</h6>
-      </li>
-      <li class="nav-item">
+      </li> -->
+     <!--  <li class="nav-item">
         <a class="nav-link {{ (Request::is('tables') ? 'active' : '') }}" href="{{ url('tables') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -98,8 +98,8 @@
           </div>
           <span class="nav-link-text ms-1">Tables</span>
         </a>
-      </li>
-      <li class="nav-item">
+      </li> -->
+     <!--  <li class="nav-item">
         <a class="nav-link {{ (Request::is('billing') ? 'active' : '') }}" href="{{ url('billing') }}">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
             <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -118,8 +118,8 @@
           </div>
           <span class="nav-link-text ms-1">Billing</span>
         </a>
-      </li>
-      <li class="nav-item mt-3">
+      </li> -->
+      <!-- <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
       </li>
       <li class="nav-item">
@@ -142,7 +142,7 @@
           </div>
           <span class="nav-link-text ms-1">Profile</span>
         </a>
-      </li>
+      </li> -->
     </ul>
   </div>
 </aside>

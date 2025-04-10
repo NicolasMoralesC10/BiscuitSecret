@@ -24,6 +24,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   @if (env('IS_DEMO'))
   <x-demo-metas></x-demo-metas>
@@ -67,7 +68,10 @@
   @endif
   <!--   Core JS Files   -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- jQuery y jQuery UI-->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<!--   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script> -->
   <script src="{{ asset('../assets/js/core/popper.min.js') }}"></script>
   <script src="{{ asset('../assets/js/core/bootstrap.min.js') }}"></script>
   <script src="{{ asset('../assets/js/plugins/perfect-scrollbar.min.js') }}"></script>

@@ -1,112 +1,121 @@
-/* From Uiverse.io by aaronross1 */ 
+/* From Uiverse.io by aaronross1 */
 .edit-button {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  border: none;
-  font-weight: 600;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
-  cursor: pointer;
-  transition-duration: 0.3s;
-  overflow: hidden;
-  position: relative;
-  text-decoration: none !important;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    font-weight: 600;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none !important;
 }
 
 .edit-svgIcon {
-  width: 17px;
-  transition-duration: 0.3s;
+    width: 17px;
+    transition-duration: 0.3s;
 }
 
 .edit-svgIcon path {
-  fill: white;
+    fill: white;
 }
 
 .edit-button:hover {
-  width: 120px;
-  border-radius: 50px;
-  transition-duration: 0.3s;
-  background-color: rgb(255, 69, 69);
-  align-items: center;
+    width: 120px;
+    border-radius: 50px;
+    transition-duration: 0.3s;
+    background-color: rgb(255, 69, 69);
+    align-items: center;
 }
 
 .edit-button:hover .edit-svgIcon {
-  width: 20px;
-  transition-duration: 0.3s;
-  transform: translateX(-60%);
-  -webkit-transform: rotate(360deg);
-  -moz-transform: rotate(360deg);
-  -o-transform: rotate(360deg);
-  -ms-transform: rotate(360deg);
-  transform: rotate(360deg);
+    width: 20px;
+    transition-duration: 0.3s;
+    transform: translateX(-60%);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
 }
 
 .edit-button::before {
-  display: none;
-  content: "Edit";
-  color: white;
-  margin-top: 10%;
-  transition-duration: 0.3s;
-  font-size: 2px;
+    display: none;
+    content: "Edit";
+    color: white;
+    margin-top: 10%;
+    transition-duration: 0.3s;
+    font-size: 2px;
 }
 
-  /* From Uiverse.io by vinodjangid07 */ 
+/* From Uiverse.io by vinodjangid07 */
 .buttonDel {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  background-color: rgb(20, 20, 20);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: rgb(20, 20, 20);
 
-  border: none;
-  font-weight: 600;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
-  cursor: pointer;
-  transition-duration: .3s;
-  overflow: hidden;
-  position: relative;
-  margin-left: 5%;
+    border: none;
+    font-weight: 600;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: relative;
+    margin-left: 5%;
 }
 
 .svgIcon {
-  width: 12px;
-  transition-duration: .3s;
+    width: 12px;
+    transition-duration: 0.3s;
 }
 
 .svgIcon path {
-  fill: white;
+    fill: white;
 }
 
 .buttonDel:hover {
-  width: 140px;
-  border-radius: 50px;
-  transition-duration: .3s;
-  background-color: rgb(255, 69, 69);
-  align-items: center;
+    width: 140px;
+    border-radius: 50px;
+    transition-duration: 0.3s;
+    background-color: rgb(255, 69, 69);
+    align-items: center;
 }
 
 .buttonDel:hover .svgIcon {
-  width: 50px;
-  transition-duration: .3s;
-  transform: translateY(50%);
+    width: 50px;
+    transition-duration: 0.3s;
+    transform: translateY(50%);
 }
 
 .buttonDel::before {
-  position: absolute;
-  top: -20px;
-  content: "Eliminar";
-  color: white;
-  transition-duration: .3s;
-  font-size: 2px;
+    position: absolute;
+    top: -20px;
+    content: "Eliminar";
+    color: white;
+    transition-duration: 0.3s;
+    font-size: 2px;
 }
 
 .buttonDel:hover::before {
-  font-size: 13px;
-  opacity: 1;
-  transform: translateY(30px);
-  transition-duration: .3s;
+    font-size: 13px;
+    opacity: 1;
+    transform: translateY(30px);
+    transition-duration: 0.3s;
 }
 
+/* Total ventas */
+.badge-custom {
+    background-color: rgb(62, 156, 84);
+    padding: 3px 8px;
+    border-radius: 20px;
+    /* color: white;
+  font-size: 0.7rem;
+  font-weight: bold; */
+}
