@@ -9,7 +9,7 @@
           <div class="row">
             <div class="col-8">
 
-            <div class="numbers">
+            <!-- <div class="numbers">
           <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Ventas</p>
           <h5 class="font-weight-bolder mb-0">
             $<span id="totalVentas"></span>
@@ -18,18 +18,19 @@
         </div>
         <div class="progress">
           <div id="barraProgreso" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
+        </div> -->
 
-              <!-- <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bolder">Ganancias</p>
+              <div class="numbers">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Ganancias</p>
                 <h5 class="font-weight-bolder mb-0">
-                  ${{ $reportes['totalVentas'] }}
-                  <span class="text-success text-sm font-weight-bolder">+55%</span>
+                  ${{ $reportes['totalVentas'] }}<!-- 
+                  <span class="text-success text-sm font-weight-bolder">+55%</span> -->
                 </h5>
-              </div> -->
+              </div>
+
             </div>
             <div class="col-4 text-end">
-              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" data-bs-toggle="tooltip" title="Ganancias totales">
                 <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
               </div>
             </div>
@@ -52,8 +53,8 @@
               </div>
             </div>
             <div class="col-4 text-end">
-              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                <i class="ni ni-credit-card text-lg opacity-10" aria-hidden="true"></i>
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" data-bs-toggle="tooltip" title="Ganancias totales este mes">
+                <i class="ni ni-bag-17 text-lg opacity-10" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -61,7 +62,39 @@
       </div>
     </div>
 
+    @php
+      $productos = $reportes['productosBajoStock'] ?? [];
+      $tooltipStock = count($productos)
+          ? 'Productos con bajo stock:<br>' . implode('<br>', $productos)
+          : 'No hay productos con bajo stock';
+    @endphp
+
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-3">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <div class="numbers">
+                <p class="text-sm text-uppercase font-weight-bold text-muted mb-1">Stock Bajo</p>
+                <h5 class="font-weight-bolder mb-1 text-danger">
+                  {{ count($reportes['productosBajoStock']) }} productos
+                </h5>
+              </div>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-danger shadow text-center border-radius-md"
+                   data-bs-toggle="tooltip"
+                   data-bs-html="true"
+                   title="{!! $tooltipStock !!}">
+                <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card">
         <div class="card-body p-3">
           <div class="row">
@@ -76,13 +109,13 @@
             </div>
             <div class="col-4 text-end">
               <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                <i class="fa-light fa-money-bills text-lg opacity-10" aria-hidden="true"></i>
+                <i class="ni ni-ui-04 text-lg opacity-10" aria-hidden="true"></i>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     
     <div class="col-xl-3 col-sm-6">
       <div class="card">
@@ -99,7 +132,7 @@
             </div>
             <div class="col-4 text-end">
               <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                <i class="ni ni-calendar-grid-58 text-lg opacity-10" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -656,7 +689,7 @@
 @endsection
 @push('dashboard')
 <!-- Cards -->
-<script>
+<!-- <script>
   // Variables de ventas
   let totalVentasActual = 1500;
   let totalVentasAnterior = 1000;
@@ -680,10 +713,10 @@
   // Actualizar la barra de progreso
   document.getElementById('barraProgreso').style.width = `${porcentajeCambio}%`;
   document.getElementById('barraProgreso').setAttribute('aria-valuenow', porcentajeCambio);
-</script>
+</script> -->
 
 <!-- Script plantilla -->
-  <!-- <script>
+<!-- <script>
     window.onload = function() {
       var ctx = document.getElementById("chart-bars").getContext("2d");
 
@@ -854,7 +887,7 @@
         },
       });
     }
-  </script> -->
+</script> -->
 
 <!-- Script ejemplo -->
 <!-- <script>

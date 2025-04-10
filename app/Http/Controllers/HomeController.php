@@ -19,6 +19,7 @@ class HomeController extends Controller
     {
         /* $ventas = Venta::with('productos')->paginate(10); */
         
+    $productosBajoStock = Producto::where('cantidad', '<', 5)->pluck('nombre')->toArray();
         $totalVentas = Venta::sum('total');
         $cantidadVentas = Venta::where('estado', 1)->count();
         $productosEnVenta = Producto::where('estado', 1)->count();
@@ -31,6 +32,7 @@ class HomeController extends Controller
                'cantidadVentas' => $cantidadVentas,
                'productosEnVenta' => $productosEnVenta,
                'stocksBajo' => $stocksBajo,
+               'productosBajoStock' => $productosBajoStock,
            ];
 
         return view('dashboard', compact('reportes'));
