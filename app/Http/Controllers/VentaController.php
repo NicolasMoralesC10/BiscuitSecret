@@ -97,7 +97,7 @@ class VentaController extends Controller
         }
 
 
-        $nombreArchivo = 'Reporte - Productos mas Vendidos/' . date('Y-m-d_H-i-s') . '.pdf';
+        $nombreArchivo = 'Reporte - Productos Vendidos/' . date('Y-m-d_H-i-s') . '.pdf';
         $fpdf->Output($nombreArchivo, 'I');
         exit;
     }
