@@ -21,16 +21,16 @@
         </div> -->
 
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Ganancias</p>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Ingresos</p>
                 <h5 class="font-weight-bolder mb-0">
-                  ${{ $reportes['totalVentas'] }}<!-- 
+                  ${{ $reportes['totalVentas'] }} pesos<!-- 
                   <span class="text-success text-sm font-weight-bolder">+55%</span> -->
                 </h5>
               </div>
 
             </div>
             <div class="col-4 text-end">
-              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" data-bs-toggle="tooltip" title="Ganancias totales">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                 <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
               </div>
             </div>
@@ -51,9 +51,9 @@
                   <span class="text-success text-sm font-weight-bolder">+3%</span>
                 </h5>
               </div>
-            </div>
+            </div>  
             <div class="col-4 text-end">
-              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md" data-bs-toggle="tooltip" title="Ganancias totales este mes">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                 <i class="ni ni-bag-17 text-lg opacity-10" aria-hidden="true"></i>
               </div>
             </div>
@@ -70,21 +70,20 @@
     @endphp
 
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card border-0 shadow-sm">
+      <div class="card">
         <div class="card-body p-3">
-          <div class="row align-items-center">
+          <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm text-uppercase font-weight-bold text-muted mb-1">Stock Bajo</p>
-                <h5 class="font-weight-bolder mb-1 text-danger">
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Stock Bajo</p>
+                <h5 class="font-weight-bolder mb-0">
                   {{ count($reportes['productosBajoStock']) }} productos
                 </h5>
               </div>
             </div>
             <div class="col-4 text-end">
-              <div class="icon icon-shape bg-gradient-danger shadow text-center border-radius-md"
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md"
                    data-bs-toggle="tooltip"
-                   data-bs-html="true"
                    title="{!! $tooltipStock !!}">
                 <i class="ni ni-archive-2 text-lg opacity-10" aria-hidden="true"></i>
               </div>
@@ -123,15 +122,17 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Ventas Hoy</p>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Resumen diario</p>
                 <h5 class="font-weight-bolder mb-0">
-                  {{ $reportes['cantidadVentas'] }}
-                  <span class="text-success text-sm font-weight-bolder">+5%</span>
+                  {{ $reportes['cantidadVentas'] }} ventas hoy 
+                  <!-- <span class="text-success text-sm font-weight-bolder">+5%</span> -->
                 </h5>
               </div>
             </div>
             <div class="col-4 text-end">
-              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+              <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md"
+                   data-bs-toggle="tooltip"   
+                   title="Cantidad de Ventas">
                 <i class="ni ni-calendar-grid-58 text-lg opacity-10" aria-hidden="true"></i>
               </div>
             </div>
@@ -163,7 +164,7 @@
               <div class="bg-gradient-primary border-radius-lg h-100">
                 <img src="../assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
                 <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                  <img class="w-100 position-relative z-index-2 pt-4" src="../assets/img/illustrations/rocket-white.png" alt="rocket">
+                  <img class="w-100 position-relative z-index-2 pt-4" src="../assets/img/logo-preview.png" alt="rocket">
                 </div>
               </div>
             </div>
