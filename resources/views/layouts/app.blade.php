@@ -24,16 +24,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   @if (env('IS_DEMO'))
   <x-demo-metas></x-demo-metas>
   @endif
 
   <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('../assets/img/apple-icon.png') }}">
   <link rel="icon" type="image/png" href="{{ asset('../assets/img/favicon.png') }}">
+  
   <title>
     Soft UI Dashboard by Creative Tim
   </title>
+  <!-- jQuery CSS -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
@@ -58,7 +61,6 @@
 
   <!--   Core JS Files   -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
   <script src="{{ asset('../assets/js/core/popper.min.js') }}"></script>
   <script src="{{ asset('../assets/js/core/bootstrap.min.js') }}"></script>
   <script src="{{ asset('../assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
