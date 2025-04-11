@@ -77,8 +77,11 @@ class VentaController extends Controller
                 $fpdf->SetTextColor(0, 0, 0);
                 $fpdf->Cell(120, 10, utf8_decode($producto['nombre']), 1, 0, 'C', 0);
                 foreach ($ventas as $venta){
-                    $totalVendido += $venta->pivot->cantidad;
-                    $valTotal += $venta->pivot->subtotal;
+                    $ventaValidate = Venta::find($venta->pivot->ventas_id_venta);
+                    if ($ventaValidate['estado'] == 1){
+                        $totalVendido += $venta->pivot->cantidad;
+                        $valTotal += $venta->pivot->subtotal;
+                    }
                 }
                 $totalEsperado = $totalVendido * $producto['precio'];
                 $totalEsp += $totalEsperado;
