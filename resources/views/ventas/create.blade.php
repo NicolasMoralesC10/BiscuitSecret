@@ -147,7 +147,7 @@
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-end">
+                
                             <button type="submit" class="btn bg-gradient-dark btn-md mt-2 mb-2">{{ 'Guardar' }}</button>
                         </div>
                     </div>

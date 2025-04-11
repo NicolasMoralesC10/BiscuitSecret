@@ -162,7 +162,7 @@
                             <div class="form-group">
                                 <label for="user-email" class="form-control-label">Imagen</label>
                                 <div class="@error('image')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" value="" type="file" name="imagen" accept="image/*" required>
+                                    <input class="form-control" value="" type="file" name="imagen" accept="image/*" >
                                     @error('image')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VentaController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
@@ -11,7 +12,8 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductoController;
-use App\Http\Controllers\VentaController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,14 +26,15 @@ use App\Http\Controllers\VentaController;
 |
 */
 
-
 Route::group(['middleware' => 'auth'], function () {
 
-	Route::get('/', [HomeController::class, 'home']);
-	Route::get('dashboard', function () {
-		return view('dashboard');
-	})->name('dashboard');
+    Route::get('/', [HomeController::class, 'home']);
 	Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
+	Route::get('/ventas/totales', [HomeController::class, 'obtenerVentasTotales']);
+	Route::get('/ventas/por-hora', [HomeController::class, 'obtenerVentasPorHora']);
+
+	Route::resource('ventas', VentaController::class);
+	Route::post('/obtener-stock', [VentaController::class, 'obtenerStock']);
 
 	Route::resource('ventas', VentaController::class);
 	Route::post('/obtener-stock', [VentaController::class, 'obtenerStock']);
@@ -82,8 +85,6 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('dashboard');
 	})->name('sign-up');
 });
-
-
 
 Route::group(['middleware' => 'guest'], function () {
 	Route::get('/register', [RegisterController::class, 'create']);
