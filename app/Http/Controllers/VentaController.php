@@ -60,36 +60,46 @@ class VentaController extends Controller
         $fpdf->SetDrawColor(163, 163, 163);
         $fpdf->SetFont('Arial', 'B', 11);
         $fpdf->Cell(120, 10, utf8_decode('NOMBRE DEL PRODUCTO'), 1, 0, 'C', 1);
-        $fpdf->Cell(80, 10, utf8_decode('CANTIDAD DE VENTAS'), 1, 0, 'C', 1);
-        $fpdf->Cell(80, 10, utf8_decode('TOTAL DE VENTAS'), 1, 1, 'C', 1);
+        $fpdf->Cell(53, 10, utf8_decode('CANTIDAD DE VENTAS'), 1, 0, 'C', 1);
+        $fpdf->Cell(53, 10, utf8_decode('TOTAL RECIBIDO'), 1, 0, 'C', 1);
+        $fpdf->Cell(53, 10, utf8_decode('TOTAL ESPERADO'), 1, 1, 'C', 1);
         $productos = Producto::all();
         if (!empty($productos)) {
             $totalVentas = 0;
+            $totalEsp = 0;
             foreach ($productos as $producto) {
                 $product = Producto::find($producto['id']);
                 $ventas = $product->ventas;
                 $totalVendido = 0;
+                $totalEsperado = 0;
                 $valTotal = 0;
                 // Crear filas de la tabla con los datos de la consulta
                 $fpdf->SetTextColor(0, 0, 0);
                 $fpdf->Cell(120, 10, utf8_decode($producto['nombre']), 1, 0, 'C', 0);
                 foreach ($ventas as $venta){
                     $totalVendido += $venta->pivot->cantidad;
+                    $valTotal += $venta->pivot->subtotal;
                 }
-                $valTotal = $producto['precio'] * $totalVendido;
+                $totalEsperado = $totalVendido * $producto['precio'];
+                $totalEsp += $totalEsperado;
                 $totalVentas += $valTotal;
                 $fpdf->SetTextColor(0, 0, 0);
-                $fpdf->Cell(80, 10, utf8_decode($totalVendido), 1, 0, 'C', 0);
+                $fpdf->Cell(53, 10, utf8_decode($totalVendido), 1, 0, 'C', 0);
                 $fpdf->SetTextColor(0, 0, 0);
-                $fpdf->Cell(80, 10, utf8_decode($valTotal), 1, 1, 'C', 0);
+                $fpdf->Cell(53, 10, utf8_decode($valTotal), 1, 0, 'C', 0);
+                $fpdf->SetTextColor(0, 0, 0);
+                $fpdf->Cell(53, 10, utf8_decode($totalEsperado), 1, 1, 'C', 0);
+
             }
             $fpdf->SetFillColor(161, 130, 98);
             $fpdf->SetTextColor(255, 255, 255);
             $fpdf->SetDrawColor(163, 163, 163);
             $fpdf->SetFont('Arial', 'B', 11);
-            $fpdf->Cell(200, 10, utf8_decode("TOTAL DE VENTAS"), 1, 0, 'C', 1);
+            $fpdf->Cell(173, 10, utf8_decode("TOTAL DE VENTAS"), 1, 0, 'C', 1);
             $fpdf->SetTextColor(0, 0, 0);
-            $fpdf->Cell(80, 10, utf8_decode($totalVentas), 1, 1, 'C', 0);     
+            $fpdf->Cell(53, 10, utf8_decode($totalVentas), 1, 0, 'C', 0);     
+            $fpdf->SetTextColor(0, 0, 0);
+            $fpdf->Cell(53, 10, utf8_decode($totalEsp), 1, 1, 'C', 0);     
         } else {
             $fpdf->Cell(40);
             $fpdf->SetTextColor(0, 0, 0);
