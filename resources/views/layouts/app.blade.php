@@ -25,14 +25,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   @if (env('IS_DEMO'))
   <x-demo-metas></x-demo-metas>
   @endif
-
-  <link rel="apple-touch-icon" sizes="76x76" href=" {{ asset( '../assets/img/apple-icon.png')}}">
-  <link rel="icon" type="image/png" href="{{ asset( '../assets/img/favicon.png')}}">
   <link rel="apple-touch-icon" sizes="76x76" href=" {{ asset( '../assets/img/apple-icon.png')}}">
   <link rel="icon" type="image/png" href="{{ asset( '../assets/img/favicon.png')}}">
   <title>
@@ -77,7 +73,7 @@
   <!-- jQuery y jQuery UI-->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<!--   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script> -->
+  <!--   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script> -->
   <script src="{{ asset('../assets/js/core/popper.min.js') }}"></script>
   <script src="{{ asset('../assets/js/core/bootstrap.min.js') }}"></script>
   <script src="{{ asset('../assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
@@ -99,21 +95,18 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-    if (document.querySelector('#parrafo')){
+    if (document.querySelector('#parrafo')) {
       let parrafo = document.querySelector('#parrafo');
-      setTimeout(() => 
-      parrafo.remove() , 2000);
+      setTimeout(() =>
+        parrafo.remove(), 2000);
     }
   </script>
+  <!-- Sweet Alert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- Sweet Alert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{ asset('../assets/js/soft-ui-dashboard.min.js?v=1.0.3') }}"></script>
-
 
 </body>
 

@@ -41,7 +41,7 @@
                 </div>
 
             </div>
-            <div class="col-md-12 mt20 mt-2">
-                <button type="submit" class="btn btn-primary">{{ __('Enviar') }}</button>
+            <div class="d-flex justify-content-end mt-4">
+                <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>
             </div>
         </div>

@@ -10,8 +10,6 @@ use App\Models\Venta;
 
 class HomeController extends Controller
 {
-  
-
     public function home()
     {
         return redirect('dashboard');
@@ -20,22 +18,22 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         /* $ventas = Venta::with('productos')->paginate(10); */
-        
+
         $productosBajoStock = Producto::where('cantidad', '<', 5)->pluck('nombre')->toArray();
-        $totalVentas = Venta::sum('total');
+        $totalVentas = Venta::where('estado', 1)->sum('total');
         $cantidadVentas = Venta::where('estado', 1)->count();
         $productosEnVenta = Producto::where('estado', 1)->count();
         $stocksBajo = Producto::where('cantidad', '<', 10)
-                      ->where('estado', 1)
-                      ->count();
+            ->where('estado', 1)
+            ->count();
 
         $reportes = [
-               'totalVentas' => $totalVentas,
-               'cantidadVentas' => $cantidadVentas,
-               'productosEnVenta' => $productosEnVenta,
-               'stocksBajo' => $stocksBajo,
-               'productosBajoStock' => $productosBajoStock,
-           ];
+            'totalVentas' => $totalVentas,
+            'cantidadVentas' => $cantidadVentas,
+            'productosEnVenta' => $productosEnVenta,
+            'stocksBajo' => $stocksBajo,
+            'productosBajoStock' => $productosBajoStock,
+        ];
 
         return view('dashboard', compact('reportes'));
     }
@@ -108,7 +106,7 @@ class HomeController extends Controller
         return response()->json($data);
     } */
 
-/*     public function obtenerVentas()
+    /*     public function obtenerVentas()
 {
     // Obtener las ventas con las relaciones y agregarlas por hora y producto
     $resultados = DB::table('ventas_has_productos')
@@ -188,9 +186,9 @@ class HomeController extends Controller
         return response()->json($data);
     } */
 
-     // Función para obtener ventas totales por producto
-     /* Con Eloquent */
-     /* public function obtenerVentasTotales()
+    // Función para obtener ventas totales por producto
+    /* Con Eloquent */
+    /* public function obtenerVentasTotales()
      {
          // Obtener los productos con la relación a la tabla pivote y calcular las ventas totales
          $productos = Producto::with(['ventas' => function ($query) {
@@ -211,13 +209,15 @@ class HomeController extends Controller
          return response()->json($data);
      } */
 
-     /* Con Query Builder */
-     public function obtenerVentasTotales()
+    /* Con Query Builder */
+    public function obtenerVentasTotales()
     {
         // Consulta utilizando DB para obtener el total de ventas por producto
         $productos = DB::table('productos')
-            ->select('productos.nombre', DB::raw('SUM(ventas_has_productos.cantidad * ventas_has_productos.subtotal) as total_ventas'))
+            ->select('productos.nombre', DB::raw('SUM(ventas_has_productos.subtotal) as total_ventas'))
             ->join('ventas_has_productos', 'productos.id', '=', 'ventas_has_productos.productos_id_producto')
+            ->join('ventas', 'ventas.id', '=', 'ventas_has_productos.ventas_id_venta') // <-- este join es necesario
+            ->where('ventas.estado', 1) // <-- aquí aplicamos el filtro
             ->groupBy('productos.id', 'productos.nombre')
             ->get();
 
@@ -237,12 +237,22 @@ class HomeController extends Controller
     {
         // Definir las horas predeterminadas (de 8:00 AM a 6:00 PM)
         $horasPredeterminadas = [
-            '', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
+            '',
+            '08:00',
+            '09:00',
+            '10:00',
+            '11:00',
+            '12:00',
+            '13:00',
+            '14:00',
+            '15:00',
+            '16:00',
+            '17:00'
         ];
-    
+
         // Inicializar el array para almacenar las ventas agrupadas por hora y producto
         $ventasAgrupadas = [];
-    
+
         // Obtener las ventas de la base de datos
         $resultados = DB::table('ventas_has_productos')
             ->join('productos', 'productos.id', '=', 'ventas_has_productos.productos_id_producto')
@@ -252,11 +262,12 @@ class HomeController extends Controller
                 DB::raw('HOUR(ventas.created_at) as hora')
             )
             ->join('ventas', 'ventas.id', '=', 'ventas_has_productos.ventas_id_venta')
+            ->where('ventas.estado', 1)
             ->whereBetween(DB::raw('HOUR(ventas.created_at)'), [8, 18]) // Filtrar ventas entre las 8:00 AM y 6:00 PM
             ->groupBy('productos.nombre', 'hora')
             ->orderBy('hora', 'asc') // Ordenar por hora
             ->get();
-    
+
         // Inicializar los resultados para las horas predeterminadas
         foreach ($horasPredeterminadas as $hora) {
             // Inicializar los productos para cada hora
@@ -267,18 +278,18 @@ class HomeController extends Controller
                 'Galleta de Avena con Fresas' => 0,
             ];
         }
-    
+
         // Procesar los resultados de la base de datos y asignarlos a las horas predeterminadas
         foreach ($resultados as $venta) {
             // Asignar las cantidades vendidas a la hora correcta
             $hora = str_pad($venta->hora, 2, '0', STR_PAD_LEFT) . ':00';  // Convertir la hora a formato HH:00
             $nombre = $venta->nombre;
-    
+
             if (isset($ventasAgrupadas[$hora])) {
                 $ventasAgrupadas[$hora][$nombre] = $venta->cantidad_vendida;
             }
         }
-    
+
         // Transformar los datos a un formato adecuado para el frontend
         $data = [];
         foreach ($ventasAgrupadas as $hora => $productos) {
@@ -290,7 +301,7 @@ class HomeController extends Controller
                 ];
             }
         }
-    
+
         // Retornar los datos en formato JSON
         return response()->json($data);
     }
@@ -303,5 +314,4 @@ Inicialización de ventas agrupadas: Inicializamos el array $ventasAgrupadas con
 Procesamiento de los resultados: Una vez obtenidos los resultados de la base de datos, asignamos las cantidades de ventas de los productos a la hora correspondiente. Si no hay ventas en una hora, la cantidad se mantiene en 0.
 
 Transformación de datos: Finalmente, se formatea el array para que sea adecuado para el frontend y se envía como respuesta en formato JSON. */
-    
 }

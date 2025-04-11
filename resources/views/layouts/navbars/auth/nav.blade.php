@@ -8,75 +8,75 @@
 
             // Productos
             if (str_contains($path, 'productos')) {
-            $breadcrumbs[] = ['label' => 'Productos', 'url' => url('productos')];
-
-            if (str_contains($path, 'create')) {
-            $breadcrumbs[] = ['label' => 'Nuevo producto'];
-            } elseif (str_contains($path, 'edit')) {
-            $breadcrumbs[] = ['label' => 'Editar producto'];
+                $breadcrumbs[] = ['label' => 'Productos', 'url' => url('productos')];
+                if (str_contains($path, 'create')) {
+                $breadcrumbs[] = ['label' => 'Nuevo producto'];
+                } elseif (str_contains($path, 'edit')) {
+                $breadcrumbs[] = ['label' => 'Editar producto'];
+                } else {
+                $breadcrumbs[] = ['label' => 'Listar productos'];
+                }
+            } elseif (str_contains($path, 'users')) {
+                $breadcrumbs[] = ['label' => 'Usuarios', 'url' => url('users')];
+                if (str_contains($path, 'create')) {
+                $breadcrumbs[] = ['label' => 'Nuevo Usuario'];
+                } elseif (str_contains($path, 'edit')) {
+                $breadcrumbs[] = ['label' => 'Editar Usuario'];
+                } else {
+                $breadcrumbs[] = ['label' => 'Listar Usuarios'];
+                }
+            } elseif (str_contains($path, 'ventas')) {
+                $breadcrumbs[] = ['label' => 'Ventas', 'url' => url('ventas')];
+                if (str_contains($path, 'create')) {
+                $breadcrumbs[] = ['label' => 'Nueva Venta'];
+                } else {
+                $breadcrumbs[] = ['label' => 'Listar Ventas'];
+                }
             } else {
-            $breadcrumbs[] = ['label' => 'Listar productos'];
-            }
-            }
-            // Usuarios
-            elseif (str_contains($path, 'users')) {
-            $breadcrumbs[] = ['label' => 'Usuarios', 'url' => url('users')];
-
-            if (str_contains($path, 'create')) {
-            $breadcrumbs[] = ['label' => 'Nuevo Usuario'];
-            } elseif (str_contains($path, 'edit')) {
-            $breadcrumbs[] = ['label' => 'Editar Usuario'];
-            } else {
-            $breadcrumbs[] = ['label' => 'Listar Usuarios'];
-            }
-            }
-            // Ventas
-            elseif (str_contains($path, 'ventas')) {
-            if (str_contains($path, 'create')) {
-            $breadcrumbs[] = ['label' => 'Nueva Venta'];
-            } else {
-            $breadcrumbs[] = ['label' => 'Listar Ventas'];
-            }
-            }
-            // Otros: se muestra el path modificado
-            else {
-            $breadcrumbs[] = ['label' => ucwords(str_replace('-', ' ', $path))];
+                $breadcrumbs[] = ['label' => ucwords(str_replace('-', ' ', $path))];
             }
             @endphp
 
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 @foreach ($breadcrumbs as $breadcrumb)
-                @if (isset($breadcrumb['url']))
-                <li class="breadcrumb-item text-sm">
-                    <a class="opacity-5 text-dark" href="{{ $breadcrumb['url'] }}">
-                        {{ $breadcrumb['label'] }}
-                    </a>
-                </li>
-                @else
-                {{-- En el caso de "ventas" se usa <h6> en lugar de <li> según la lógica original --}}
-                @if (str_contains($path, 'ventas'))
-                <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">
-                    {{ $breadcrumb['label'] }}
-                </h6>
-                @else
-                <li class="breadcrumb-item text-sm text-dark active text-capitalize" aria-current="page">
-                    {{ $breadcrumb['label'] }}
-                </li>
-                @endif
-                @endif
+                    @if (isset($breadcrumb['url']))
+                    <li class="breadcrumb-item text-sm">
+                        <a class="opacity-5 text-dark" href="{{ $breadcrumb['url'] }}">
+                            {{ $breadcrumb['label'] }}
+                        </a>
+                    </li>
+               
+                
+                    @endif
                 @endforeach
             </ol>
 
             @if (str_contains(Request::path(), 'productos'))
-            @if (str_contains(Request::path(), 'create'))
-            <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Nuevo producto</h6>
-            @elseif (str_contains(Request::path(), 'edit'))
-            <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Editar producto</h6>
-            @else
-            <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Listar productos</h6>
-            @endif
-            @else
-            <h6 class="font-weight-bolder mb-0 text-capitalize">{{ str_replace('-', ' ', Request::path()) }}</h6>
+                @if (str_contains(Request::path(), 'create'))
+                    <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Nuevo producto</h6>
+                @elseif (str_contains(Request::path(), 'edit'))
+                    <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Editar producto</h6>
+                @else
+                    <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Listar productos</h6>
+                @endif
+            @elseif (str_contains(Request::path(), 'ventas'))
+                @if (str_contains(Request::path(), 'create'))
+                    <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Nueva venta</h6>
+                @elseif (str_contains(Request::path(), 'edit'))
+                    <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Editar venta</h6>
+                @else
+                    <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Listar ventas</h6>
+                @endif
+            @elseif (str_contains(Request::path(), 'users'))
+                @if (str_contains(Request::path(), 'create'))
+                    <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Nuevo usuario</h6>
+                @elseif (str_contains(Request::path(), 'edit'))
+                    <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Editar usuario</h6>
+                @else
+                    <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">Listar usuarios</h6>
+                @endif
+                @else
+                <h6 class="font-weight-bolder mb-0 text-capitalize" aria-current="page">{{ Request::path()}}</h6>
             @endif
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 d-flex justify-content-end" id="navbar">

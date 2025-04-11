@@ -45,10 +45,10 @@
         <div class="row">
           <div class="col-8">
             <div class="numbers">
-              <p class="text-sm mb-0 text-capitalize font-weight-bold">Productos en Venta</p>
+              <p class="text-sm mb-0 text-capitalize font-weight-bold">Inventario</p>
               <h5 class="font-weight-bolder mb-0">
-                {{ $reportes['productosEnVenta'] }}
-                <span class="text-success text-sm font-weight-bolder">+3%</span>
+                {{ $reportes['productosEnVenta'] }} productos
+                <!-- <span class="text-success text-sm font-weight-bolder">+3%</span> -->
               </h5>
             </div>
           </div>
@@ -150,10 +150,10 @@
           <div class="col-lg-6">
             <div class="d-flex flex-column h-100">
               <p class="mb-1 pt-2 text-bold">Dashboard</p>
-              <h5 class="font-weight-bolder">Biscuit Secret</h5>
-              <em class="mb-5">
-                Este sistema diseñado para optimizar el manejo de tu inventario ofrece funcionalidades clave para controlar el stock, realizar seguimiento de ventas y automatizar procesos administrativos.
-              </em>
+              <h5 class="font-weight-bolder mt-3">Biscuit Secret</h5>
+
+              Este sistema diseñado para optimizar el manejo de tu inventario ofrece funcionalidades clave para controlar el stock, realizar seguimiento de ventas y automatizar procesos administrativos.
+
               <!-- <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
                   Read More
                   <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
@@ -1496,6 +1496,7 @@
     fetch('{{ url("/ventas/por-hora") }}')
       .then(response => response.json())
       .then(data => {
+        console.log(data)
         // Aquí extraemos los datos del formato que nos llegó
         const horas = [];
         const galletaChocolate = [];

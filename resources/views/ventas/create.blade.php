@@ -135,7 +135,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="dinero-recibido">Dinero Recibido</label>
-                                    <input type="number" class="form-control" id="dinero-recibido" placeholder="Ingrese el dinero recibido">
+                                    <input type="number" class="form-control" id="dinero-recibido" placeholder="Ingrese el dinero recibido" min="0" >
                                 </div>
                             </div>
 
@@ -147,14 +147,16 @@
                             </div>
                         </div>
 
-                
-                            <button type="submit" class="btn bg-gradient-dark btn-md mt-2 mb-2">{{ 'Guardar' }}</button>
+                        <div class="d-flex justify-content-end mt-4">
+                            <button type="submit" class="btn bg-gradient-primary btn-md mt-2 mb-2">{{ 'Guardar' }}</button>
                         </div>
+
                     </div>
-                </form>
             </div>
+            </form>
         </div>
     </div>
+</div>
 </div>
 
 <!-- --------------------------------------------------------------------------------------------->
@@ -387,6 +389,7 @@
                 }
             });
         }
+
         function validarCantidadCero(campo) {
             var cantidad = $(campo).val();
 
