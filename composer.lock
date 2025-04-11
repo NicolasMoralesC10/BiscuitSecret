@@ -137,26 +137,26 @@
         },
         {
             "name": "codedge/laravel-fpdf",
-            "version": "1.12.3",
+            "version": "1.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codedge/laravel-fpdf.git",
-                "reference": "98b01bc4c61f2ec70a5ec120106507961481d593"
+                "reference": "9319768852f483ec5a3b00ca19b2157349c88fb9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codedge/laravel-fpdf/zipball/98b01bc4c61f2ec70a5ec120106507961481d593",
-                "reference": "98b01bc4c61f2ec70a5ec120106507961481d593",
+                "url": "https://api.github.com/repos/codedge/laravel-fpdf/zipball/9319768852f483ec5a3b00ca19b2157349c88fb9",
+                "reference": "9319768852f483ec5a3b00ca19b2157349c88fb9",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "^11.0 || ^12.0",
-                "php": "~8.3 || ~8.4"
+                "illuminate/support": "^9.0 || ^10.0 || ^11.0",
+                "php": "^8.1"
             },
             "require-dev": {
                 "ergebnis/composer-normalize": "^2.39",
-                "orchestra/testbench": "^9.0 || ^10.0",
-                "phpunit/phpunit": "^10.5 || ^11.5.3"
+                "orchestra/testbench": "^7.35.0 || ^8.0 || ^9.0",
+                "phpunit/phpunit": "^9.6.0 || ^10.5"
             },
             "type": "library",
             "extra": {
@@ -200,7 +200,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-14T15:54:58+00:00"
+            "time": "2024-03-19T13:25:39+00:00"
         },
         {
             "name": "dflydev/dot-access-data",

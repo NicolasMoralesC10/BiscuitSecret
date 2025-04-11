@@ -37,6 +37,8 @@
   </title>
   <!-- jQuery CSS -->
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- jQuery CSS -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
@@ -58,14 +60,7 @@
   @yield('guest')
   @endguest
 
-  @if(session()->has('success'))
-  <!--   <div x-data="{ show: true}"
-    x-show="show"
-    class="position-fixed bg-success rounded right-3 text-sm py-2 px-4" id="parrafo">
-    <p class="m-0">{{ session('success')}}</p>
-  </div> -->
 
-  @endif
   <!--   Core JS Files   -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- jQuery y jQuery UI-->
