@@ -20,7 +20,7 @@ class HomeController extends Controller
         /* $ventas = Venta::with('productos')->paginate(10); */
         
         $productosBajoStock = Producto::where('cantidad', '<', 5)->pluck('nombre')->toArray();
-        $totalVentas = Venta::sum('total');
+        $totalVentas = Venta::where('estado', 1)->sum('total');
         $cantidadVentas = Venta::where('estado', 1)->count();
         $productosEnVenta = Producto::where('estado', 1)->count();
         $stocksBajo = Producto::where('cantidad', '<', 10)
@@ -216,6 +216,8 @@ class HomeController extends Controller
         $productos = DB::table('productos')
             ->select('productos.nombre', DB::raw('SUM(ventas_has_productos.cantidad * ventas_has_productos.subtotal) as total_ventas'))
             ->join('ventas_has_productos', 'productos.id', '=', 'ventas_has_productos.productos_id_producto')
+            ->join('ventas', 'ventas.id', '=', 'ventas_has_productos.ventas_id_venta') // <-- este join es necesario
+            ->where('ventas.estado', 1) // <-- aquí aplicamos el filtro
             ->groupBy('productos.id', 'productos.nombre')
             ->get();
 
@@ -250,6 +252,7 @@ class HomeController extends Controller
                 DB::raw('HOUR(ventas.created_at) as hora')
             )
             ->join('ventas', 'ventas.id', '=', 'ventas_has_productos.ventas_id_venta')
+            ->where('ventas.estado', 1)
             ->whereBetween(DB::raw('HOUR(ventas.created_at)'), [8, 18]) // Filtrar ventas entre las 8:00 AM y 6:00 PM
             ->groupBy('productos.nombre', 'hora')
             ->orderBy('hora', 'asc') // Ordenar por hora
