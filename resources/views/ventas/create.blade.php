@@ -246,6 +246,17 @@
         }
 
         // -----------------------------------
+        //      TRAER IMAGEN DEL PRODCUTO
+        // -----------------------------------
+
+         function imagenProducto(productoId) {
+            return $.ajax({
+               url: '{{ url("/obtener-imagen") }}/' + productoId,
+               method: 'GET'
+            });
+         }
+
+        // -----------------------------------
         //    AGREGAR PRODUCTO A TABLA
         // -----------------------------------
 
@@ -266,7 +277,57 @@
                     text: 'El producto ya está en la tabla de productos seleccionados.',
                 });
             } else {
-               $("#card-table").show();
+
+               imagenProducto(id).then(function(response) {
+                   let imagen = response.url;
+                   console.log(imagen)
+                   
+                   $("#card-table").show();
+                   let nuevaFila = `<tr>
+                                 	<td>
+													<div class="d-flex px-2 py-1">
+                          						<div>
+                          						  <img src="` + imagen + `" class="avatar avatar-sm me-3" alt="user2">
+                          						</div>
+                                       	<div class="d-flex flex-column justify-content-center"> 
+                                      			<input type="hidden" name="producto_id[]" value="` + id + `"> 
+                                       	   <h6 class="mb-0 text-sm">` + nombre + `</h6>
+														</div>
+                                       </div>
+                                    </td>
+													
+                                 	<td>
+													<div class="">
+                                       	<div class=""> 
+															<input type="number" min="1" name="cantidad[]" id="cantidad" class="form-control" placeholder="Cantidad" required>
+														</div>
+                                       </div>
+                                    </td>
+
+                                 	<td>
+													<div class="">
+                                       	<div class=""> 
+															<input type="number" name="precio[]" id="precioInput" class="form-control" placeholder="` + precio + `" required>
+														</div>
+                                       </div>
+                                    </td>
+
+                                    <td style="text-align: center;">
+													<div class="pt-3">
+														<button type="button" class="btn btn-danger btn-sm eliminar-fila">
+															<i class="fas fa-trash"></i>
+														</button>
+                                       </div>
+												</td>
+                                 </tr>`;
+                   console.log(nuevaFila);
+                   console.log($("#tabla-productos tbody"));
+                   $("#tabla-productos tbody").append(nuevaFila);
+               }).catch(function() {
+                   console.log('Error cargando la imagen');
+               });
+
+               /* $("#card-table").show();
                 let nuevaFila = `<tr>
                                  	<td>
 													<div class="d-flex px-2 py-1">
@@ -306,7 +367,7 @@
                                  </tr>`;
                 console.log(nuevaFila);
                 console.log($("#tabla-productos tbody"));
-                $("#tabla-productos tbody").append(nuevaFila);
+                $("#tabla-productos tbody").append(nuevaFila); */
             }
         }
 
@@ -429,17 +490,6 @@
             // -----------------------------------
             //    VERIFICAR INPUTS VACIOS
             // -----------------------------------
-            /* var inputMetodos = $("#metodos").val();
-            		if (inputMetodos.trim() === "" || inputMetodos == null) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Metodo de pago no asignado!',
-                    text: 'Por favor, ingrese el metodo de pago.',
-                });
-                return false;
-            		}
-            	console.log(inputMetodos); */
-
 
             /* var inputPrecio = $("#precio").val();
             		if (inputPrecio.trim() === "" || inputPrecio == null) {
@@ -451,26 +501,6 @@
                          return false;
             		}
             	console.log(inputPrecio); */
-
-            /* var inputClien = $("#clien").val();
-            		if (inputClien.trim() === "" || inputClien == null) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: '¡Cliente no asignado!',
-                    text: 'Por favor, ingrese el cliente.',
-                });
-                return false;
-            		} */
-
-            /* var inputEmpleado = $("#emple").val();
-            		if (inputEmpleado.trim() === "" || inputEmpleado == null) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Empleado no asignado!',
-                    text: 'Por favor, ingrese el empleado.',
-                });
-                return false;
-            		} */
 
             var filas = $("#tabla-productos tbody tr").length;
             if (filas === 0) {
@@ -490,42 +520,13 @@
                 var productoId = $(this).find("input[name='producto_id[]']").val();
                 var cantidad = $(this).find("input[name='cantidad[]']").val();
                 var precio = $(this).find("input[name='precio[]']").val();
-                /* var metodoPago = $("#metodoPagoId").val();
-                var cliente = $("#clientes").val();
-                var empleado = $("#empleados").val(); */
 
                 /* formData.append('action', 'agregar'); */
                 formData.append('producto_id[]', productoId);
                 formData.append('cantidad[]', cantidad);
                 formData.append('precio[]', precio);
-                /* formData.append('metodoPagoId', metodoPago);
-                formData.append('clientes', cliente);
-                formData.append('empleados', empleado); */
                 formData.append('total', total);
             });
-
-            /* $.ajax({
-                type: 'POST',
-                url: '../public/indexRegistroVentas.php',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(respuesta) {
-                    console.log("AJAX exitoso:", respuesta); // Verificar la respuesta
-                    Swal.fire({
-                        text: '¡Venta registrada correctamente!',
-                        icon: 'success',
-                        timer: 2000,
-                        showConfirmButton: false
-                    }).then(() => {
-                        window.location.href = 'indexRegistroVentas.php';
-                    });
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error en la solicitud AJAX:', error);
-                    console.log(xhr.responseText); // Ver detalles del error del servidor
-                }
-            }); */
 
             $.ajaxSetup({
                 headers: {
@@ -535,12 +536,12 @@
 
             $.ajax({
                 type: 'POST',
-                url: '{{ route('ventas.store') }}', // Usar route() si hay una ruta definida
+                url: '{{ route('ventas.store') }}',
                 data: formData,
                 processData: false,
                 contentType: false,
                 success: function(respuesta) {
-                    console.log("AJAX exitoso:", respuesta); // Verificar la respuesta
+                    console.log("AJAX exitoso:", respuesta);
                     Swal.fire({
                         text: '¡Venta registrada correctamente!',
                         icon: 'success',
@@ -552,7 +553,7 @@
                 },
                 error: function(xhr, status, error) {
                     console.error('Error en la solicitud AJAX:', error);
-                    console.log(xhr.responseText); // Ver detalles del error del servidor
+                    console.log(xhr.responseText);
                 }
             });
             return false;

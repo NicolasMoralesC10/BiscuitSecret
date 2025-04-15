@@ -17,6 +17,22 @@ class VentaController extends Controller
         return view('ventas.index', compact('ventas'))
             ->with('i', ($request->input('page', 1) - 1) * $ventas->perPage());
     }
+
+    public function obtenerImagen($id)
+    {
+        $producto = Producto::find($id);
+
+        if (!$producto || !$producto->imagen) {
+            return response()->json(['error' => 'Imagen no encontrada'], 404);
+        }
+
+        // Si la imagen está en el storage
+        /* $url = Storage::url($producto->imagen); */ // Asume que tienes la ruta guardada en el campo `imagen`
+        /* $url = asset('assets/img/' . $producto->imagen); */
+        $url = asset('storage/' . $producto->imagen);
+
+        return response()->json(['url' => $url]);
+    }
     
     public function obtenerStock(Request $request)
     {

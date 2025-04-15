@@ -85,63 +85,56 @@ class HomeController extends Controller
 
     public function obtenerVentasPorHora()
     {
-        // Horas predeterminadas (de 8:00 AM a 6:00 PM)
-        $horasPredeterminadas = [
-            '', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'
-        ];
-    
-        // Array para almacenar las ventas agrupadas por hora y producto
+        // Horas predeterminadas (de 8:00 AM a 5:00 PM)
+        $horasPredeterminadas = ['', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
+
+        // Obtener productos únicos que tienen ventas activas
+        $productos = DB::table('productos')
+            ->join('ventas_has_productos', 'productos.id', '=', 'ventas_has_productos.productos_id_producto')
+            ->join('ventas', 'ventas.id', '=', 'ventas_has_productos.ventas_id_venta')
+            ->where('ventas.estado', 1)
+            ->distinct()
+            ->pluck('productos.nombre');
+
+        // Inicializar estructura de ventas agrupadas por hora y producto
         $ventasAgrupadas = [];
-    
-        // Obtener las ventas de la base de datos
+        foreach ($horasPredeterminadas as $hora) {
+            $ventasAgrupadas[$hora] = [];
+            foreach ($productos as $producto) {
+                $ventasAgrupadas[$hora][$producto] = 0;
+            }
+        }
+
+        // Obtener las ventas desde la base de datos
         $resultados = DB::table('ventas_has_productos')
             ->join('productos', 'productos.id', '=', 'ventas_has_productos.productos_id_producto')
+            ->join('ventas', 'ventas.id', '=', 'ventas_has_productos.ventas_id_venta')
             ->select(
                 'productos.nombre',
                 DB::raw('SUM(ventas_has_productos.cantidad) as cantidad_vendida'),
                 DB::raw('HOUR(ventas.created_at) as hora')
             )
-            ->join('ventas', 'ventas.id', '=', 'ventas_has_productos.ventas_id_venta')
             ->where('ventas.estado', 1)
-            ->whereBetween(DB::raw('HOUR(ventas.created_at)'), [8, 18]) // Filtrar ventas entre las 8:00 AM y 6:00 PM
+            ->whereBetween(DB::raw('HOUR(ventas.created_at)'), [8, 17])
             ->groupBy('productos.nombre', 'hora')
-            ->orderBy('hora', 'asc') 
+            ->orderBy('hora', 'asc')
             ->get();
-    
-        // Inicializar los resultados para las horas predeterminadas
-        foreach ($horasPredeterminadas as $hora) {
-            // Inicializar los productos para cada hora
-            $ventasAgrupadas[$hora] = [
-                'Galleta de Chocolate' => 0,
-                'Galleta de Oreo' => 0,
-                'Galleta de Snickers y Masmelos' => 0,
-                'Galleta de Avena con Fresas' => 0,
-            ];
-        }
-    
-        // Procesar los resultados de la base de datos y asignarlos a las horas predeterminadas
+
+        // Asignar cantidades a la estructura inicializada
         foreach ($resultados as $venta) {
-            // Asignar las cantidades vendidas a la hora correcta
-            $hora = str_pad($venta->hora, 2, '0', STR_PAD_LEFT) . ':00';  // Convertir la hora a formato HH:00
-            $nombre = $venta->nombre;
-    
-            if (isset($ventasAgrupadas[$hora])) {
-                $ventasAgrupadas[$hora][$nombre] = $venta->cantidad_vendida;
+            $hora = str_pad($venta->hora, 2, '0', STR_PAD_LEFT) . ':00';
+            if (isset($ventasAgrupadas[$hora]) && isset($ventasAgrupadas[$hora][$venta->nombre])) {
+                $ventasAgrupadas[$hora][$venta->nombre] = $venta->cantidad_vendida;
             }
         }
-    
-        // Transformar los datos a un formato adecuado para el frontend
-        $data = [];
-        foreach ($ventasAgrupadas as $hora => $productos) {
-            foreach ($productos as $nombre => $cantidad_vendida) {
-                $data[] = [
-                    'hora' => $hora,
-                    'nombre' => $nombre,
-                    'cantidad_vendida' => $cantidad_vendida,
-                ];
-            }
-        }
-    
+
+        // Formatear para el frontend
+        $data = [
+            'productos' => $productos,
+            'horas' => $horasPredeterminadas,
+            'ventas' => $ventasAgrupadas
+        ];
+
         return response()->json($data);
     }
 
