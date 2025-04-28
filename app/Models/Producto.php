@@ -17,6 +17,7 @@ class Producto extends Model
         'cantidad',
         'imagen',
         'estado',
+        'estado'
 
     ];
 

@@ -10,7 +10,8 @@ class ProductoController extends Controller
     public function index()
     {
 
-        $productos = Producto::orderByRaw('estado = 1 DESC')
+        $productos = Producto::whereIn('estado', [1,2])
+            ->orderByRaw('estado = 1 DESC')
             ->orderBy('nombre', 'asc')
             ->paginate(6);
 
@@ -81,7 +82,9 @@ class ProductoController extends Controller
 
     public function destroy(Producto $producto)
     {
-        $producto->delete();
+        $producto->estado = 0;
+        $producto->save();
+/*         $producto->delete(); */
 
         return redirect()->route('productos.index');
     }
