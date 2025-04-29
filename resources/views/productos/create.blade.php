@@ -126,7 +126,7 @@
                             <div class="form-group">
                                 <label for="user-name" class="form-control-label">Nombre</label>
                                 <div class="@error('user.name')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" value="" type="text" placeholder="Name" name="nombre" required>
+                                    <input class="form-control" value="" type="text" placeholder="Nombre del Producto" name="nombre" required>
                                     @error('name')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror
@@ -151,7 +151,7 @@
                             <div class="form-group">
                                 <label for="user.phone" class="form-control-label">Cantidad</label>
                                 <div class="@error('cantidad')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="number" min="1" placeholder="Cantidad" name="cantidad" value="" required>
+                                    <input class="form-control" type="number" min="1" placeholder="Cantidad o stock disponible del producto" name="cantidad" value="" required>
                                     @error('cantidad')
                                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                     @enderror

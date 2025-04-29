@@ -22,7 +22,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header bg-gradient-primary">
-                                        <h5 class="modal-title" id="imageModalLabel">Imagen</h5>
+                                        <h5 class="modal-title text-light text-bold" id="imageModalLabel">Imagen</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                                     </div>
                                     <div class="modal-body text-center">
@@ -87,7 +87,7 @@
                                     </td>
                                     @elseif($producto->estado == 2)
                                     <td class="text-center">
-                                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
+                                        <span class="badge badge-sm bg-gradient-secondary">Inactivo</span>
                                     </td>
                                     @endif
 

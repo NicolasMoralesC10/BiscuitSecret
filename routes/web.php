@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/ventas/por-hora', [HomeController::class, 'obtenerVentasPorHora']);
 
 	Route::resource('ventas', VentaController::class);
+	Route::get('/obtener-imagen/{id}', [VentaController::class, 'obtenerImagen']);
 	Route::post('/obtener-stock', [VentaController::class, 'obtenerStock']);
 
 	Route::resource('ventas', VentaController::class);
