@@ -67,8 +67,7 @@ Biscuit Secret es un sistema de gestión desarrollado en Laravel para administra
 
 - **Gestión de Productos**: Catálogo completo con información detallada, precios e inventario.
 - **Gestión de Ventas**: Registro y seguimiento de transacciones, reportes e historial.
-- **Gestión de Usuarios**: Sistema de roles y permisos para diferentes niveles de acceso.
-- **Recuperación de Contraseña**: Sistema de recuperación segura mediante correo electrónico.
+- **Gestión de Usuarios**: Recuperación segura mediante correo electrónico.
 - **Interfaz Intuitiva**: Diseño responsive y amigable para una mejor experiencia de usuario.
 
 ## Requisitos Técnicos 
