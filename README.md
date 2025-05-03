@@ -1,5 +1,11 @@
 # Biscuit Secret - Sistema de Gestión <img src="https://github.com/user-attachments/assets/2ec2e5ef-5be4-424e-b492-c18e028fa50b" width="55" height="55" alt="Biscuit Secret Logo" align="right">
 
+## Descripción del Proyecto
+
+Biscuit Secret es un sistema de gestión desarrollado en Laravel para administrar un negocio de galletas. Este proyecto formativo permite gestionar productos, ventas y usuarios de manera eficiente y segura.
+
+---
+
 ## Contenidos
 
 * [Descripción del Proyecto](#descripción-del-proyecto)
@@ -17,9 +23,6 @@
 * [Estructura del Proyecto](#estructura-del-proyecto)
 * [Uso Básico](#uso-básico)
 
-## Descripción del Proyecto
-
-Biscuit Secret es un sistema de gestión desarrollado en Laravel para administrar un negocio de galletas. Este proyecto formativo permite gestionar productos, ventas y usuarios de manera eficiente y segura.
 
 ## Scrum Master 
 
