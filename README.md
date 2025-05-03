@@ -30,7 +30,7 @@ Biscuit Secret es un sistema de gestión desarrollado en Laravel para administra
 
 ## Development Team 
 
-- <strong>Lead Developer</strong>: Nicolas Morales
+- <strong>Development Leader</strong>: Nicolas Morales
   <a href="https://github.com/NicolasMoralesC10" target="_blank" rel="noopener noreferrer">
     <img
       src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white"
