@@ -3,8 +3,8 @@
 ## Contenidos
 
 * [Descripción del Proyecto](#descripción-del-proyecto)
-* [development team](#development-team)
 * [Scrum Master](#scrum-master)
+* [development team](#development-team)
 * [Características Principales](#características-principales)
 * [Requisitos Técnicos](#requisitos-técnicos)
 * [Instalación](#instalación)
