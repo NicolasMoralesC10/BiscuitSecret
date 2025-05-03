@@ -1,4 +1,4 @@
-# Biscuit Secret - Sistema de Gestión <img src="https://github.com/user-attachments/assets/2ec2e5ef-5be4-424e-b492-c18e028fa50b" width="55" height="55" alt="Biscuit Secret Logo" align="right">
+# Biscuit Secret - Sistema de Gestión <img src="https://github.com/user-attachments/assets/2ec2e5ef-5be4-424e-b492-c18e028fa50b" width="50" height="50" alt="Biscuit Secret Logo" align="right">
 
 ## Descripción del Proyecto
 
