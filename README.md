@@ -73,7 +73,7 @@ Biscuit Secret es un sistema de gestión desarrollado en Laravel para administra
 ## Requisitos Técnicos 
 🛠️
 
-- **Sistema Operativo**: Linux (Ubuntu recomendado), macOS, o Windows
+- **Sistema Operativo**: Windows, Linux, o macOs 
 - **PHP**: Versión 8.1 o superior
 - **Laravel**: Versión 11.44 o superior
 - **Base de Datos**: MySQL, PostgreSQL o SQLite
