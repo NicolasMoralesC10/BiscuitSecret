@@ -15,7 +15,7 @@ return new class extends Migration
 
             $table->increments('id');
             $table->string('nombre', 100);
-            $table->string('descripcion', 255);
+            $table->string('descripcion', 255)->nullable();
             $table->integer('precio');
             $table->integer('cantidad');
             $table->string('imagen', 200)->nullable();

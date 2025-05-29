@@ -173,7 +173,7 @@
                     <div class="form-group">
                         <label for="about">Descripcion</label>
                         <div class="@error('about')border border-danger rounded-3 @enderror">
-                            <textarea class="form-control" id="about" rows="3" placeholder="Descripcion del Producto" name="descripcion" required></textarea>
+                            <textarea class="form-control" id="about" rows="3" placeholder="Descripcion del Producto" name="descripcion"></textarea>
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
