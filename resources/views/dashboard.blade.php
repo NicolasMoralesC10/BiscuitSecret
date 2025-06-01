@@ -52,7 +52,7 @@
   @php
   $productos = $reportes['productosBajoStock'] ?? [];
   $tooltipStock = count($productos)
-  ? 'Productos con bajo stock:<br>' . implode('<br>', $productos)
+  ? 'Productos con bajo stock: ' . implode($productos)
   : 'No hay productos con bajo stock';
   @endphp
 

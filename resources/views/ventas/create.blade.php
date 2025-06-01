@@ -42,38 +42,11 @@
                         <input type="text" class="form-control" id="product" placeholder="Ingrese el nombre del producto">
                      </div>
                   </div>
-                  <!-- </div> -->
 
-
-                  <!-- <div class="card-body px-0 pt-0 pb-2">
-                                        <div class="table-responsive p-0">
-                                    
-                                            <table class="table bordered align-items-center mb-3">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Producto</th>
-                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cantidad</th>
-                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Precio</th>
-                                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Eliminar</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    Aquí se agregan dinámicamente las filas
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div> -->
-
-
-
-
-                  <!-- <div class="container-fluid"> -->
                   <div class="row">
                      <div class="col-12">
                         <div class="card mb-4 shadow-lg" id="card-table">
-                           <!-- <div class="card-header">
-                                          <h6>Productos</h6>
-                                        </div> -->
+                           
                            <div class="card-body px-0 pt-0 pb-2">
                               <div class="table-responsive p-0">
                                  <table class="table align-items-center mb-0" id="tabla-productos">
@@ -83,36 +56,10 @@
                                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cantidad</th>
                                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Precio</th>
                                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ELiminar</th>
-                                          <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Producto</th>
-                     	                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Cantidad</th>
-                     	                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Precio</th>
-                     	                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Eliminar</th> -->
                                        </tr>
                                     </thead>
                                     <tbody>
-                                       <!-- <tr>
-                                                        <td>
-                                                            <div class="d-flex px-2 py-1">
-                                                                <div>
-                                                                    <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user2">
-                                                                </div>
-                                                                <div class="d-flex flex-column justify-content-center">
-                                                                    <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                                                                    <p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <p class="text-xs font-weight-bold mb-0">Programator</p>
-                                                            <p class="text-xs text-secondary mb-0">Developer</p>
-                                                        </td>
-                                                        <td class="align-middle text-center text-sm">
-                                                            <span class="badge badge-sm bg-gradient-success">Online</span>
-                                                        </td>
-                                                        <td class="align-middle text-center">
-                                                            <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
-                                                        </td>
-                                                    </tr> -->
+                                       <!-- Aca se renderizan los productos seleccionados -->
                                     </tbody>
                                  </table>
                               </div>
@@ -120,10 +67,7 @@
                         </div>
                      </div>
                   </div>
-                  <!-- </div> -->
 
-
-                  <!-- <div class="container-fluid"> -->
                   <div class="row">
                      <div class="col-md-4">
                         <div class="form-group">
@@ -135,7 +79,7 @@
                      <div class="col-md-4">
                         <div class="form-group">
                            <label for="dinero-recibido">Dinero Recibido</label>
-                           <input type="number" class="form-control" id="dinero-recibido" placeholder="Ingrese el dinero recibido">
+                           <input type="text" inputmode="numeric" class="form-control" id="dinero-recibido" placeholder="Ingrese el dinero recibido">
                         </div>
                      </div>
 
@@ -206,7 +150,7 @@
       //    LLAMADO ACTUALIZAR TOTALES
       // -----------------------------------
 
-      $(document).on('blur', 'input[name="cantidad[]"], input[name="precio[]"]', function() {
+      $(document).on('input', 'input[name="cantidad[]"], input[name="precio[]"]', function() {
          actualizarTotales();
       });
 
@@ -219,19 +163,39 @@
       });
 
       // -----------------------------------
+      //    FORMATEAR NUMEROS, AGREGAR PUNTO DE MIL
+      // -----------------------------------   
+
+      function formatNumber(num) {
+          return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      }
+
+      $(document).on('input', 'input[name="cantidad[]"], input[name="precio[]"], #total-pagar, #dinero-recibido, #cambio', function() {
+          let val = $(this).val().replace(/\./g, ''); // Quita puntos existentes
+          if (val === '') return;
+          if (isNaN(val)) return; // Solo números
+          $(this).val(formatNumber(val));
+      });
+      
+      // Valor sin formato para cálculos:
+      function getUnformattedValue(input) {
+          return parseFloat($(input).val().replace(/\./g, '')) || 0;
+      }
+
+      // -----------------------------------
       //    ACTUALIZAR TOTALES
       // -----------------------------------   
 
       function actualizarTotales() {
-         var totalPagar = 0;
+          var totalPagar = 0;
 
-         $('#tabla-productos tbody tr').each(function() {
-            var cantidad = parseFloat($(this).find('input[name="cantidad[]"]').val()) || 0;
-            var precio = parseFloat($(this).find('input[name="precio[]"]').val()) || 0;
-            totalPagar += cantidad * precio;
-         });
-
-         $('#total-pagar').val(totalPagar.toFixed(0));
+          $('#tabla-productos tbody tr').each(function() {
+              var cantidad = getUnformattedValue($(this).find('input[name="cantidad[]"]'));
+              var precio = getUnformattedValue($(this).find('input[name="precio[]"]'));
+              totalPagar += cantidad * precio;
+          });
+       
+          $('#total-pagar').val(formatNumber(totalPagar.toFixed(0)));
       }
 
       // -----------------------------------
@@ -239,10 +203,10 @@
       // -----------------------------------
 
       function actualizarCambio() {
-         var totalPagar = parseFloat($('#total-pagar').val()) || 0;
-         var dineroRecibido = parseFloat($('#dinero-recibido').val()) || 0;
-         var cambio = dineroRecibido - totalPagar;
-         $('#cambio').val(cambio.toFixed(0));
+          var totalPagar = getUnformattedValue($('#total-pagar'));
+          var dineroRecibido = getUnformattedValue($('#dinero-recibido'));
+          var cambio = dineroRecibido - totalPagar;
+          $('#cambio').val(formatNumber(cambio.toFixed(0)));
       }
 
       // -----------------------------------
@@ -259,74 +223,6 @@
       // -----------------------------------
       //    AGREGAR PRODUCTO A TABLA
       // -----------------------------------
-
-      /* function agregarProducto(id, nombre, precio) {
-            var productoYaAgregado = false;
-
-            $("#tabla-productos tbody tr").each(function() {
-                if ($(this).find("input[name='producto_id[]']").val() == id) {
-                    productoYaAgregado = true;
-                    return false;
-                }
-            });
-
-            if (productoYaAgregado) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: '¡Producto ya agregado!',
-                    text: 'El producto ya está en la tabla de productos seleccionados.',
-                });
-            } else {
-                imagenProducto(id).then(function(response) {
-                    let imagen = response.url;
-                    console.log(imagen)
-
-                    $("#card-table").show();
-                    let nuevaFila = `<tr>
-                                 	<td>
-													<div class="d-flex px-2 py-1">
-                          						<div>
-                          						  <img src="` + imagen + `" class="avatar avatar-sm me-3" alt="user2">
-                          						</div>
-                                       	<div class="d-flex flex-column justify-content-center"> 
-                                      			<input type="hidden" name="producto_id[]" value="` + id + `"> 
-                                       	   <h6 class="mb-0 text-sm">` + nombre + `</h6>
-														</div>
-                                       </div>
-                                    </td>
-													
-                                 	<td>
-													<div class="">
-                                       	<div class=""> 
-															<input type="number" min="1" name="cantidad[]" id="cantidad" class="form-control" placeholder="Cantidad" required>
-														</div>
-                                       </div>
-                                    </td>
-
-                                 	<td>
-													<div class="">
-                                       	<div class=""> 
-															<input type="number" name="precio[]" id="precioInput" class="form-control" placeholder="` + precio + `" required>
-														</div>
-                                       </div>
-                                    </td>
-
-                                    <td style="text-align: center;">
-													<div class="pt-3">
-														<button type="button" class="btn btn-danger btn-sm eliminar-fila">
-															<i class="fas fa-trash"></i>
-														</button>
-                                       </div>
-												</td>
-                                 </tr>`;
-                    console.log(nuevaFila);
-                    console.log($("#tabla-productos tbody"));
-                    $("#tabla-productos tbody").append(nuevaFila);
-                }).catch(function() {
-                    console.log('Error cargando la imagen');
-                });
-            }
-        } */
 
       function agregarProducto(id, nombre, precio) {
           var productoYaAgregado = false;
@@ -369,14 +265,14 @@
                                        <td>
                                            <div>
                                                <div>
-                                                   <input type="number" min="1" name="cantidad[]" class="form-control" placeholder="Cantidad" required>
+                                                   <input type="text" inputmode="numeric" min="1" name="cantidad[]" class="form-control" placeholder="Cantidad" required>
                                                </div>
                                            </div>
                                        </td>
                                        <td>
                                            <div>
                                                <div>
-                                                   <input type="number" name="precio[]" class="form-control" placeholder="${precio}" required>
+                                                   <input type="text" inputmode="numeric" name="precio[]" class="form-control" placeholder="${precio}" required>
                                                </div>
                                            </div>
                                        </td>
@@ -390,7 +286,9 @@
                                    </tr>`;
                   $("#tabla-productos tbody").append(nuevaFila);
               }
-           
+              
+              $('#dinero-recibido').val('');
+              $('#cambio').val('');
               imagenProducto(id).then(function(response) {
                   let imagen = response.url;
                   agregarFila(imagen);
@@ -500,13 +398,16 @@
 
       $(document).on('click', '.eliminar-fila', function() {
          $(this).closest('tr').remove();
-         $('#total-pagar').val('');
-         $('#dinero-recibido').val('');
-         $('#cambio').val('');
          $("#cantidad").focus();
          var filas = $("#tabla-productos tbody tr").length;
          if (filas === 0) {
+            $('#total-pagar').val('');
+            $('#dinero-recibido').val('');
+            $('#cambio').val('');
             $("#card-table").hide();
+         } else {
+            actualizarTotales();
+            actualizarCambio();
          }
       });
 
@@ -516,21 +417,6 @@
 
       $("#form-venta").on("submit", function(e) {
          e.preventDefault();
-
-         // -----------------------------------
-         //    VERIFICAR INPUTS VACIOS
-         // -----------------------------------
-
-         /* var inputPrecio = $("#precio").val();
-         		if (inputPrecio.trim() === "" || inputPrecio == null) {
-                      Swal.fire({
-                          icon: 'warning',
-                          title: 'Pago no asignada!',
-                          text: 'Por favor, ingrese el pago.',
-                      });
-                      return false;
-         		}
-         	console.log(inputPrecio); */
 
          var filas = $("#tabla-productos tbody tr").length;
          if (filas === 0) {
@@ -545,11 +431,11 @@
          }
 
          var formData = new FormData();
-         var total = $("#total-pagar").val();
+         var total = $("#total-pagar").val().replace(/\./g, '');
          $("#tabla-productos tbody tr").each(function() {
             var productoId = $(this).find("input[name='producto_id[]']").val();
-            var cantidad = $(this).find("input[name='cantidad[]']").val();
-            var precio = $(this).find("input[name='precio[]']").val();
+            var cantidad = $(this).find("input[name='cantidad[]']").val().replace(/\./g, '');
+            var precio = $(this).find("input[name='precio[]']").val().replace(/\./g, '');
 
             /* formData.append('action', 'agregar'); */
             formData.append('producto_id[]', productoId);
