@@ -17,7 +17,7 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $productosBajoStock = Producto::where('cantidad', '<', 5)->pluck('nombre')->toArray();
+        $productosBajoStock = Producto::where('cantidad', '<', 5)->where('estado', 1)->pluck('nombre')->toArray();
         $totalVentas = Venta::where('estado', 1)->sum('total');
         $cantidadVentas = Venta::where('estado', 1)->count();
         $productosEnVenta = Producto::where('estado', 1)->count();
